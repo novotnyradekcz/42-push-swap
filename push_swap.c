@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/25 21:10:38 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/08/25 21:27:21 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,38 @@ void	process_stack(int argc, char **argv)
 
 int check_input(int length, char **input)
 {
-    int i;
-    int j;
+	int i;
+	int j;
 
-    i = 1;
-    while (i < length - 1)
-    {
-        j = 0;
-        if (input[i][j] > '9' || input[i][j] < '0')
-        {
-            if (input[i][j] != '-' && input[i][j] != '+')
-                return (1);
-        }
-        while (input[i][j])
-        {
-            if (input[i][j] > '9' || input[i][j] < '0')
-                return (1);
-            j++;
-        }
+	i = 1;
+	while (i < length - 1)
+	{
+		j = 0;
+		if (input[i][j] > '9' || input[i][j] < '0')
+		{
+			if (input[i][j] != '-' && input[i][j] != '+')
+				return (1);
+		}
+		while (input[i][j])
+		{
+			if (input[i][j] > '9' || input[i][j] < '0')
+				return (1);
+			j++;
+		}
 		if (j > 10)
 			return (1);
-        i++;
-    }
-    return (0);
+		i++;
+	}
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
-    int	i;
+	int	i;
 	
 	if (check_input(argc, argv))
-        return (1);
-    i = 1;
+		eturn (1);
+	i = 1;
 	while (i < argc)
 	{
 		if (ft_atoi(argv[i]) < -2147483648 || ft_atoi(argv[i]) > 2147483647)
