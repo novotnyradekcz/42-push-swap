@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/25 21:27:21 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:30:55 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	process_stack(int argc, char **argv)
 	int	*stack_a;
 	int	*stack_b;
 	int	i;
-
-	stack_a = (int *) malloc(sizeof(int) * (argc - 1));
-	stack_b = (int *) malloc(sizeof(int) * (argc - 1));
+	// TODO: idea - merge stack_a and b into one array of arrays stack[][]
+	stack_a = (int *) malloc(sizeof(int) * (argc));	// leave one extra sport for size
+	stack_b = (int *) malloc(sizeof(int) * (argc));	// stack_a[0] and stack_b[0] is current size of stack 
 	i = 0;
 	while (i++ < argc - 1)
 		stack_a[i - 1] = ft_atoi(argv[i]);
