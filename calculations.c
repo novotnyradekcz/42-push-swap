@@ -14,5 +14,20 @@
 
 int	operations(int *stack_a, int *stack_b, int number)
 {
-	
+	int i;
+	int	front;
+	int	back;
+
+	i = 1;
+	while (stack_b[i] > stack_a[number])
+		i++;
+	front = i - 1;
+	i = stack_a[0];
+	while (stack_b[i] < stack_a[number])
+		i--;
+	back = i + 1;
+	if (front < back)
+		return (front);
+	else
+		return (back);
 }
