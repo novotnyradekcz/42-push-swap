@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 19:03:16 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/31 19:57:09 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:12:57 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ void	three(int *stack_a, int *stack_b)
 			reverse_rotate(stack_a, stack_b, 0);
 		else
 		{
-			rotate(stack_a, stack_b, 0);
 			swap(stack_a, stack_b, 0);
-			reverse_rotate(stack_a, stack_b, 0);
+			rotate(stack_a, stack_b, 0);
 		}
 	}
 	else if (stack_a[1] < stack_a[3])
