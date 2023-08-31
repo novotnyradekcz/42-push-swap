@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/29 13:30:55 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:54:58 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,18 @@ long	ft_atoi(const char *nptr)
 	return (neg * res);
 }
 
-void	sort_stacks(int *stack_a, int *stack_b, int size)
+void	sort_stacks(int *stack_a, int *stack_b)
 {
-	int	i;
-	int	size_a;
-	
-	while(size_a > 0)
+	// int	i;
+
+	if (stack_a[0] < 4)
 	{
-		
+		special_cases(stack_a, stack_b);
+		return ;
+	}
+	while(stack_a[0] > 0)
+	{
+		return ;	// placeholder
 	}
 }
 
@@ -57,18 +61,20 @@ void	process_stack(int argc, char **argv)
 	stack_a = (int *) malloc(sizeof(int) * (argc));	// leave one extra sport for size
 	stack_b = (int *) malloc(sizeof(int) * (argc));	// stack_a[0] and stack_b[0] is current size of stack 
 	i = 0;
+	stack_a[0] = argc - 1;
+	stack_b[0] = 0;
 	while (i++ < argc - 1)
-		stack_a[i - 1] = ft_atoi(argv[i]);
-	sort_stacks(stack_a, stack_b, i);
+		stack_a[i] = ft_atoi(argv[i]);
+	sort_stacks(stack_a, stack_b);
 }
 
-int check_input(int length, char **input)
+int	check_input(int length, char **input)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
-	while (i < length - 1)
+	while (i < length)
 	{
 		j = 0;
 		if (input[i][j] > '9' || input[i][j] < '0')
@@ -89,14 +95,19 @@ int check_input(int length, char **input)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	i;
-	
+
+	if (argc < 2)
+		return (1);
 	if (check_input(argc, argv))
-		eturn (1);
-	i = 1;
-	while (i < argc)
+	{
+		write(1, "Error\n", 6);
+		return (1);
+	}
+	i = 0;
+	while (++i < argc)
 	{
 		if (ft_atoi(argv[i]) < -2147483648 || ft_atoi(argv[i]) > 2147483647)
 			return (1);

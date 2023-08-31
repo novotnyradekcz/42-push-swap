@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 21:11:42 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/29 17:11:02 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:22:29 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	swap(int *stack_a, int *stack_b, int to_swap)
 {
 	int	tmp;
-	
+
 	if (to_swap == 0 || to_swap == -1)
 	{
 		tmp = stack_a[1];
@@ -38,7 +38,7 @@ void	swap(int *stack_a, int *stack_b, int to_swap)
 
 void	push_a(int *stack_a, int *stack_b)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (++i < stack_a[0])

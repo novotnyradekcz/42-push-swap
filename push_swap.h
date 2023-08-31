@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:38:50 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/30 16:56:45 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:50:19 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <unistd.h>
 
-int 	main(int argc, char **argv);
-int 	check_input(int length, char **input);
+int		main(int argc, char **argv);
+int		check_input(int length, char **input);
 void	process_stack(int argc, char **argv);
-void	sort_stacks(int *stack_a, int *stack_b, int size);
+void	sort_stacks(int *stack_a, int *stack_b);
 long	ft_atoi(const char *nptr);
 
 void	swap(int *stack_a, int *stack_b, int to_swap);
@@ -26,5 +27,11 @@ void	push_a(int *stack_a, int *stack_b);
 void	push_b(int *stack_a, int *stack_b);
 void	rotate(int *stack_a, int *stack_b, int to_rotate);
 void	reverse_rotate(int *stack_a, int *stack_b, int to_rotate);
+
+int		operations(int *stack_a, int *stack_b, int number);
+void	special_cases(int *stack_a, int *stack_b);
+
+void	two(int *stack_a, int *stack_b);
+void	three(int *stack_a, int *stack_b);
 
 #endif
