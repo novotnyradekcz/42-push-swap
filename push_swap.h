@@ -33,5 +33,6 @@ void	special_cases(int *stack_a, int *stack_b);
 
 void	two(int *stack_a, int *stack_b);
 void	three(int *stack_a, int *stack_b);
+void	four(int *stack_a, int *stack_b);
 
 #endif

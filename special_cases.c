@@ -45,3 +45,8 @@ void	three(int *stack_a, int *stack_b)
 	}
 	return ;
 }
+
+void	four(int *stack_a, int *stack_b)
+{
+	if (stack_a[1] < stack_a[2])
+}
