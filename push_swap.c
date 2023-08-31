@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/31 19:54:58 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:04:32 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,14 @@ int	check_input(int length, char **input)
 			if (input[i][j] != '-' && input[i][j] != '+')
 				return (1);
 		}
+		j++;
 		while (input[i][j])
 		{
 			if (input[i][j] > '9' || input[i][j] < '0')
 				return (1);
 			j++;
 		}
-		if (j > 10)
+		if (j > 11)
 			return (1);
 		i++;
 	}
@@ -110,7 +111,10 @@ int	main(int argc, char **argv)
 	while (++i < argc)
 	{
 		if (ft_atoi(argv[i]) < -2147483648 || ft_atoi(argv[i]) > 2147483647)
+		{
+			write(1, "Error\n", 6);
 			return (1);
+		}
 	}
 	process_stack(argc, argv);
 	return (0);

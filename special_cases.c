@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 19:03:16 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/31 19:46:31 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:57:09 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	two(int *stack_a, int *stack_b)
 {
-	if (stack_a[1] > stack_a[2])
+	if (stack_a[1] < stack_a[2])
 		return ;
-	rotate(stack_a, stack_b, 0);
+	swap(stack_a, stack_b, 0);
 	return ;
 }
 
