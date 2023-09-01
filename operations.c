@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 21:11:42 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/31 18:22:29 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/01 21:25:26 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	push_a(int *stack_a, int *stack_b)
 {
 	int	i;
 
-	i = 0;
-	while (++i < stack_a[0])
+	i = stack_a[0] + 1;
+	while (i-- > 1)
 		stack_a[i + 1] = stack_a[i];
 	stack_a[1] = stack_b[1];
 	i = 0;
@@ -56,8 +56,8 @@ void	push_b(int *stack_a, int *stack_b)
 {
 	int	i;
 
-	i = 0;
-	while (++i < stack_b[0])
+	i = stack_b[0] + 1;
+	while (i-- > 1)
 		stack_b[i + 1] = stack_b[i];
 	stack_b[1] = stack_a[1];
 	i = 0;
