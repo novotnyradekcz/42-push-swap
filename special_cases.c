@@ -45,8 +45,51 @@ void	three(int *stack_a, int *stack_b)
 	}
 	return ;
 }
-
+// by github copilot:
 void	four(int *stack_a, int *stack_b)
 {
 	if (stack_a[1] < stack_a[2])
+	{
+		if (stack_a[2] < stack_a[3])
+		{
+			push_b(stack_a, stack_b);
+			three(stack_a, stack_b);
+			push_a(stack_a, stack_b);
+		}
+		else if (stack_a[1] > stack_a[3])
+		{
+			push_b(stack_a, stack_b);
+			swap(stack_a, stack_b, 0);
+			three(stack_a, stack_b);
+			push_a(stack_a, stack_b);
+		}
+		else
+		{
+			push_b(stack_a, stack_b);
+			swap(stack_a, stack_b, 0);
+			push_a(stack_a, stack_b);
+			three(stack_a, stack_b);
+		}
+	}
+	else
+		four_too(stack_a, stack_b);
+	return ;
+}
+
+void	four_too(int *stack_a, int *stack_b)
+{
+	if (stack_a[1] < stack_a[3])
+	{
+		push_b(stack_a, stack_b);
+		three(stack_a, stack_b);
+		push_a(stack_a, stack_b);
+	}
+	else
+	{
+		swap(stack_a, stack_b, 0);
+		push_b(stack_a, stack_b);
+		three(stack_a, stack_b);
+		push_a(stack_a, stack_b);
+	}
+	return ;
 }
