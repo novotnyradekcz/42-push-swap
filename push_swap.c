@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/31 20:04:32 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:41:02 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,18 @@ long	ft_atoi(const char *nptr)
 
 void	sort_stacks(int *stack_a, int *stack_b)
 {
-	// int	i;
-
-	if (stack_a[0] < 4)
+	int	i;
+	
+	i = 1;
+	while (i < stack_a[0])
+	{
+		if (stack_a[i] > stack_a[i + 1])
+			break ;
+		i++;
+	}
+	if (i == stack_a[0])
+		return ;
+	if (stack_a[0] < 6)
 	{
 		special_cases(stack_a, stack_b);
 		return ;

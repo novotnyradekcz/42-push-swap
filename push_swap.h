@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:38:50 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/08/31 19:50:19 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:08:49 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ void	special_cases(int *stack_a, int *stack_b);
 void	two(int *stack_a, int *stack_b);
 void	three(int *stack_a, int *stack_b);
 void	four(int *stack_a, int *stack_b);
+void	five(int *stack_a, int *stack_b);
+void	five_too(int *stack_a, int *stack_b);
 
 #endif
