@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/01 19:41:02 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:16:35 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	sort_stacks(int *stack_a, int *stack_b)
 	}
 	while(stack_a[0] > 0)
 	{
+		sort(stack_a, stack_b);
 		return ;	// placeholder
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:38:50 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/01 19:08:49 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:15:44 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	rotate(int *stack_a, int *stack_b, int to_rotate);
 void	reverse_rotate(int *stack_a, int *stack_b, int to_rotate);
 
 int		operations(int *stack_a, int *stack_b, int number);
+void	sort(int *stack_a, int * stack_b);
+void	slow_sort(int *stack_a, int * stack_b);
 void	special_cases(int *stack_a, int *stack_b);
 
 void	two(int *stack_a, int *stack_b);
