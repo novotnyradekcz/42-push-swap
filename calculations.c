@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/03 19:18:31 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/03 22:19:09 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	sort(int *stack_a, int * stack_b, short *operations)
 	return ;
 }
 
-int	operations(int *stack_a, int *stack_b, int number)
+int	calaculations(int *stack_a, int *stack_b, int number)
 {
 	int	i;
 	int	front;
@@ -83,5 +83,41 @@ int	operations(int *stack_a, int *stack_b, int number)
 	if (front < back)
 		return (front);
 	else
-		return (back);
+		return ((-1) * back);
+}
+
+void	sorting(int *stack_a, int *stack_b, int a, int b)
+{
+	int i;
+	
+	if (b > 0)
+	{
+		i = 0;
+		while (i++ < a)
+			rotate(stack_a, stack_b, 0, operations);
+	}
+}
+
+void	turk_sort(int *stack_a, int *stack_b, short *operations)
+{
+	int	i;
+	int candidate;
+	int number;
+	int moves;
+
+	i = 0;
+	moves = 0;
+	number = 0;
+	candidate = 0;
+	while (i++ < stack_a[0])
+	{
+		candidate = calculations(stack_a, stack_b, i);
+		if (candidate > 0 && candidate < moves || 
+			candidate < 0 && (-1) * candidate < moves)
+		{
+			moves = candidate;
+			number = i;
+		}
+	}
+	sorting(stack_a, stack_b, number, moves);
 }
