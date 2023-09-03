@@ -2,7 +2,7 @@ NAME = push_swap
 
 BONUSNAME = checker
 
-SRCS = push_swap.c
+SRCS = push_swap.c operations.c calculations.c optimisation.c special_cases.c
 
 BONUSSRCS = checker.c
 

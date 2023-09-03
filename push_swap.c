@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/02 13:16:35 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:20:53 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ long	ft_atoi(const char *nptr)
 	return (neg * res);
 }
 
-void	sort_stacks(int *stack_a, int *stack_b)
+void	sort_stacks(int *stack_a, int *stack_b, short *operations)
 {
 	int	i;
 	
@@ -52,13 +52,13 @@ void	sort_stacks(int *stack_a, int *stack_b)
 		return ;
 	if (stack_a[0] < 6)
 	{
-		special_cases(stack_a, stack_b);
+		special_cases(stack_a, stack_b, operations);
 		return ;
 	}
 	while(stack_a[0] > 0)
 	{
-		sort(stack_a, stack_b);
-		return ;	// placeholder
+		sort(stack_a, stack_b, operations);
+		return ;
 	}
 }
 
@@ -66,16 +66,20 @@ void	process_stack(int argc, char **argv)
 {
 	int	*stack_a;
 	int	*stack_b;
+	short	*operations;
 	int	i;
 	// TODO: idea - merge stack_a and b into one array of arrays stack[][]
-	stack_a = (int *) malloc(sizeof(int) * (argc));	// leave one extra sport for size
-	stack_b = (int *) malloc(sizeof(int) * (argc));	// stack_a[0] and stack_b[0] is current size of stack 
+	stack_a = (int *) malloc(argc * sizeof(int));	// leave one extra sport for size
+	stack_b = (int *) malloc(argc * sizeof(int));	// stack_a[0] and stack_b[0] is current size of stack 
+	operations = (short *) malloc(100000 * sizeof(short));
 	i = 0;
 	stack_a[0] = argc - 1;
 	stack_b[0] = 0;
+	operations[0] = 0;
 	while (i++ < argc - 1)
 		stack_a[i] = ft_atoi(argv[i]);
-	sort_stacks(stack_a, stack_b);
+	sort_stacks(stack_a, stack_b, operations);
+	read_operations(operations);
 }
 
 int	check_input(int length, char **input)
