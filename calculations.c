@@ -126,8 +126,6 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 	push_b(stack_a, stack_b, operations);
 	// printf("stack_a: %d %d\n", stack_a[1], stack_a[2]);
 	// printf("stack_b: %d %d\n", stack_b[1], stack_b[2]);
-	if (stack_b[1] < stack_b[2])
-		rotate(stack_a, stack_b, 1, operations);
 	while (stack_a[0])
 	{
 		// printf("%d\n", stack_a[0]);
