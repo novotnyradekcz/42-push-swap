@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/05 16:56:10 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/05 21:56:32 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	calculations(int *stack_a, int *stack_b, int number)
 	while (stack_b[i] > stack_a[number] && i < stack_b[0])
 		i++;
 	front = i - 1;
-	i = stack_a[0];
+	i = stack_b[0];
 	while (stack_b[i] < stack_a[number] && i > 0)
 		i--;
 	back = i + 1;
@@ -159,9 +159,10 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 		// write(1, "b\n", 2);
 	}
 	i = 0;
-	// while (i++ < operations[0])
-	// {
-	// 	printf("%d\n", operations[i]);
-	// }
+	while (i++ < operations[0])
+		printf("%d\n", operations[i]);
+	i = 0;
+	while (i++ < stack_a[0])
+		printf("%d ", stack_a[i]);
 	free(moves);
 }
