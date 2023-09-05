@@ -6,11 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/03 22:19:09 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:56:10 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+#include <stdio.h>
 
 void	special_cases(int *stack_a, int *stack_b, short *operations)
 {
@@ -66,7 +68,7 @@ void	sort(int *stack_a, int * stack_b, short *operations)
 	return ;
 }
 
-int	calaculations(int *stack_a, int *stack_b, int number)
+int	calculations(int *stack_a, int *stack_b, int number)
 {
 	int	i;
 	int	front;
@@ -86,15 +88,30 @@ int	calaculations(int *stack_a, int *stack_b, int number)
 		return ((-1) * back);
 }
 
-void	sorting(int *stack_a, int *stack_b, int a, int b)
+void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
 {
 	int i;
 	
-	if (b > 0)
+	// printf("%d %d\n", moves[0], moves[1]);
+	if (moves[1] > 0)
 	{
 		i = 0;
-		while (i++ < a)
+		while (i++ < moves[0])
 			rotate(stack_a, stack_b, 0, operations);
+		i = 0;
+		while (i++ < moves[1])
+			rotate(stack_a, stack_b, 1, operations);
+		push_b(stack_a, stack_b, operations);
+	}
+	if (moves[1] <= 0)
+	{
+		i = 0;
+		while (i++ < (stack_a[0] - moves[0]))
+			reverse_rotate(stack_a, stack_b, 0, operations);
+		i = 0;
+		while (i++ < (stack_b[0] + moves[1]))
+			reverse_rotate(stack_a, stack_b, 1, operations);
+		push_b(stack_a, stack_b, operations);
 	}
 }
 
@@ -102,22 +119,49 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 {
 	int	i;
 	int candidate;
-	int number;
-	int moves;
+	int *moves;
 
-	i = 0;
-	moves = 0;
-	number = 0;
-	candidate = 0;
-	while (i++ < stack_a[0])
+	moves = (int *) malloc(2 * sizeof(int));
+	push_b(stack_a, stack_b, operations);
+	push_b(stack_a, stack_b, operations);
+	// printf("stack_a: %d %d\n", stack_a[1], stack_a[2]);
+	// printf("stack_b: %d %d\n", stack_b[1], stack_b[2]);
+	if (stack_b[1] < stack_b[2])
+		rotate(stack_a, stack_b, 1, operations);
+	while (stack_a[0])
 	{
-		candidate = calculations(stack_a, stack_b, i);
-		if (candidate > 0 && candidate < moves || 
-			candidate < 0 && (-1) * candidate < moves)
+		// printf("%d\n", stack_a[0]);
+		i = 0;
+		moves[0] = stack_a[0];
+		moves[1] = stack_b[0];
+		candidate = 0;
+		while (i++ < stack_a[0])
 		{
-			moves = candidate;
-			number = i;
+			candidate = calculations(stack_a, stack_b, i);
+			// printf("%d\n", candidate);
+			if ((candidate > 0 && candidate < moves[1]) || 
+				(candidate < 0 && (-1) * candidate < moves[1]))
+			{
+				moves[0] = i;
+				moves[1] = candidate;
+			}
 		}
+		// printf("hello %d\n", stack_a[0]);
+		sorting(stack_a, stack_b, moves, operations);
+		// write(1, "b\n", 2);
+		// printf("%d\n", stack_a[0]);
+		printf("%d %d\n", moves[0], moves[1]);
 	}
-	sorting(stack_a, stack_b, number, moves);
+	// printf("hello %d\n", stack_a[0]);
+	while (stack_b[0])
+	{
+		push_a(stack_a, stack_b, operations);
+		// write(1, "b\n", 2);
+	}
+	i = 0;
+	// while (i++ < operations[0])
+	// {
+	// 	printf("%d\n", operations[i]);
+	// }
+	free(moves);
 }

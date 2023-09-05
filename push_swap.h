@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:38:50 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/03 22:18:32 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:37:40 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		calculations(int *stack_a, int *stack_b, int number);
 void	sort(int *stack_a, int * stack_b, short *operations);
 void	slow_sort(int *stack_a, int * stack_b, short *operations);
 void	special_cases(int *stack_a, int *stack_b, short *operations);
+void	sorting(int *stack_a, int *stack_b, int *moves, short *operations);
+void	turk_sort(int *stack_a, int *stack_b, short *operations);
 
 void	two(int *stack_a, int *stack_b, short *operations);
 void	three(int *stack_a, int *stack_b, short *operations);
