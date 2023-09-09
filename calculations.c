@@ -92,7 +92,6 @@ void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
 {
 	int i;
 	
-	// printf("%d %d\n", moves[0], moves[1]);
 	if (moves[1] > 0)
 	{
 		i = 0;
@@ -124,10 +123,6 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 	moves = (int *) malloc(2 * sizeof(int));
 	push_b(stack_a, stack_b, operations);
 	push_b(stack_a, stack_b, operations);
-	printf("size_a: %d\n", stack_a[0]);
-	printf("size_b: %d\n", stack_b[0]);
-	// printf("stack_a: %d %d\n", stack_a[1], stack_a[2]);
-	// printf("stack_b: %d %d\n", stack_b[1], stack_b[2]);
 	while (stack_a[0])
 	{
 		printf("\nstack_a: ");
@@ -140,7 +135,6 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 			printf("%d ", stack_b[i]);
 		printf("\nsize_a: %d\n", stack_a[0]);
 		printf("size_b: %d\n", stack_b[0]);
-		// printf("%d\n", stack_a[0]);
 		i = 0;
 		moves[0] = stack_a[0];
 		moves[1] = stack_b[0];
@@ -148,7 +142,6 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 		while (i++ < stack_a[0])
 		{
 			candidate = calculations(stack_a, stack_b, i);
-			// printf("%d\n", candidate);
 			if ((candidate > 0 && candidate < moves[1])
 				|| (candidate < 0 && (-1) * candidate < moves[1]))
 			{
@@ -156,18 +149,10 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 				moves[1] = candidate;
 			}
 		}
-		// printf("hello %d\n", stack_a[0]);
 		sorting(stack_a, stack_b, moves, operations);
-		// write(1, "b\n", 2);
-		// printf("%d\n", stack_a[0]);
-		printf("%d %d\n", moves[0], moves[1]);
 	}
-	// printf("hello %d\n", stack_a[0]);
 	while (stack_b[0])
-	{
 		push_a(stack_a, stack_b, operations);
-		// write(1, "b\n", 2);
-	}
 	i = 0;
 	while (i++ < operations[0])
 		printf("%d\n", operations[i]);
