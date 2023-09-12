@@ -82,6 +82,7 @@ int	calculations(int *stack_a, int *stack_b, int number)
 	while (stack_b[i] < stack_a[number] && i > 0)
 		i--;
 	back = i;
+	printf("%d %d\n", front, back);
 	if (front < back)
 		return (front);
 	else
