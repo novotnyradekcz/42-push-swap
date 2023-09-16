@@ -126,16 +126,16 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 	push_b(stack_a, stack_b, operations);
 	while (stack_a[0])
 	{
-		printf("\nstack_a: ");
-		i = 0;
-		while (i++ < stack_a[0])
-			printf("%d ", stack_a[i]);
-		printf("\nstack_b: ");
-		i = 0;
-		while (i++ < stack_b[0])
-			printf("%d ", stack_b[i]);
-		printf("\nsize_a: %d\n", stack_a[0]);
-		printf("size_b: %d\n", stack_b[0]);
+		// printf("\nstack_a: ");
+		// i = 0;
+		// while (i++ < stack_a[0])
+		// 	printf("%d ", stack_a[i]);
+		// printf("\nstack_b: ");
+		// i = 0;
+		// while (i++ < stack_b[0])
+		// 	printf("%d ", stack_b[i]);
+		// printf("\nsize_a: %d\n", stack_a[0]);
+		// printf("size_b: %d\n", stack_b[0]);
 		i = 0;
 		moves[0] = stack_a[0];
 		moves[1] = stack_b[0];
