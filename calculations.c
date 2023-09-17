@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/17 17:49:58 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/17 21:47:00 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	calculations(int *stack_a, int *stack_b, int number)
 	int	back;
 
 	i = 1;
-	while (stack_b[i] > stack_a[number] && i < stack_b[0])
+	while (i <= stack_b[0] && stack_b[i] > stack_a[number])
 		i++;
 	front = i - 1;
 	back = stack_b[0] - front;
@@ -85,6 +85,31 @@ int	calculations(int *stack_a, int *stack_b, int number)
 	// else
 	// 	return ((-1) * back);
 	return (front);
+}
+
+int	find_max(int *stack)
+{
+	int	i;
+	int maximum;
+
+	i = 0;
+	maximum = stack[1];
+	while (i++ < stack[0])
+	{
+		if (stack[i] > maximum)
+			maximum = stack[i];
+	}
+	return (maximum);
+}
+
+void	print_stack(int *stack)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < stack[0])
+		printf("%d ", stack[i]);
+	printf("\n");
 }
 
 void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
@@ -97,9 +122,16 @@ void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
 		while (i++ < moves[0])
 			rotate(stack_a, stack_b, 0, operations);
 		i = 0;
+		print_stack(stack_b);
 		while (i++ < moves[1])
 			rotate(stack_a, stack_b, 1, operations);
+		print_stack(stack_b);
 		push_b(stack_a, stack_b, operations);
+		print_stack(stack_b);
+		i = find_max(stack_b);
+		while (stack_b[1] != i)
+			reverse_rotate(stack_a, stack_b, 1, operations);
+		print_stack(stack_b);
 	}
 	if (moves[1] < 0)
 	{
@@ -140,17 +172,18 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 				moves[1] = candidate;
 			}
 		}
+		printf("\n%d\n", moves[1]);
 		sorting(stack_a, stack_b, moves, operations);
 	}
-	i = 0;
-	candidate = -2147483648;
-	while (i++ < stack_b[0])
-	{
-		if (stack_b[i] > candidate)
-			candidate = stack_b[i];
-	}
-	while (stack_b[1] != candidate)
-		rotate(stack_a, stack_b, 1, operations);
+	// i = 0;
+	// candidate = -2147483648;
+	// while (i++ < stack_b[0])
+	// {
+	// 	if (stack_b[i] > candidate)
+	// 		candidate = stack_b[i];
+	// }
+	// while (stack_b[1] != candidate)
+	// 	rotate(stack_a, stack_b, 1, operations);
 	while (stack_b[0])
 		push_a(stack_a, stack_b, operations);
 	i = 0;
