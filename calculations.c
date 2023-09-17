@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/06 15:44:48 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/09/17 17:49:58 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,20 @@ int	calculations(int *stack_a, int *stack_b, int number)
 	while (stack_b[i] > stack_a[number] && i < stack_b[0])
 		i++;
 	front = i - 1;
-	i = stack_b[0];
-	while (stack_b[i] < stack_a[number] && i > 0)
-		i--;
-	back = i;
+	back = stack_b[0] - front;
 	printf("%d %d\n", front, back);
-	if (front < back)
-		return (front);
-	else
-		return ((-1) * back);
+	// if (front < back)
+	// 	return (front);
+	// else
+	// 	return ((-1) * back);
+	return (front);
 }
 
 void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
 {
 	int i;
 	
-	if (moves[1] > 0)
+	if (moves[1] >= 0)
 	{
 		i = 0;
 		while (i++ < moves[0])
@@ -103,7 +101,7 @@ void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
 			rotate(stack_a, stack_b, 1, operations);
 		push_b(stack_a, stack_b, operations);
 	}
-	if (moves[1] <= 0)
+	if (moves[1] < 0)
 	{
 		i = 0;
 		while (i++ < (stack_a[0] - moves[0] - 1))
@@ -124,18 +122,10 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 	moves = (int *) malloc(2 * sizeof(int));
 	push_b(stack_a, stack_b, operations);
 	push_b(stack_a, stack_b, operations);
+	if (stack_b[1] < stack_b[2])
+		swap(stack_a, stack_b, 1, operations);
 	while (stack_a[0])
 	{
-		// printf("\nstack_a: ");
-		// i = 0;
-		// while (i++ < stack_a[0])
-		// 	printf("%d ", stack_a[i]);
-		// printf("\nstack_b: ");
-		// i = 0;
-		// while (i++ < stack_b[0])
-		// 	printf("%d ", stack_b[i]);
-		// printf("\nsize_a: %d\n", stack_a[0]);
-		// printf("size_b: %d\n", stack_b[0]);
 		i = 0;
 		moves[0] = stack_a[0];
 		moves[1] = stack_b[0];
@@ -143,8 +133,8 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 		while (i++ < stack_a[0])
 		{
 			candidate = calculations(stack_a, stack_b, i);
-			if ((candidate > 0 && candidate < moves[1])
-				|| (candidate < 0 && (-1) * candidate < moves[1]))
+			if ((candidate >= 0 && candidate < moves[1])
+				|| (candidate < 0 && ((-1) * candidate) < moves[1]))
 			{
 				moves[0] = i - 1;
 				moves[1] = candidate;
@@ -152,6 +142,15 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 		}
 		sorting(stack_a, stack_b, moves, operations);
 	}
+	i = 0;
+	candidate = -2147483648;
+	while (i++ < stack_b[0])
+	{
+		if (stack_b[i] > candidate)
+			candidate = stack_b[i];
+	}
+	while (stack_b[1] != candidate)
+		rotate(stack_a, stack_b, 1, operations);
 	while (stack_b[0])
 		push_a(stack_a, stack_b, operations);
 	i = 0;
