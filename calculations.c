@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/17 21:47:00 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:54:07 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,45 +26,6 @@ void	special_cases(int *stack_a, int *stack_b, short *operations)
 		four(stack_a, stack_b, operations);
 	else
 		five(stack_a, stack_b, operations);
-	return ;
-}
-
-void	slow_sort(int *stack_a, int * stack_b, short *operations)
-{
-	int	i;
-	int	smallest;
-	int	sindex;
-	
-	i = 1;
-	smallest = stack_a[1];
-	while (i++ < stack_a[0])
-	{
-		if (stack_a[i] < smallest)
-		{
-			smallest = stack_a[i];
-			sindex = i;
-		}
-	}
-	if (sindex < stack_a[0] / 2)
-	{
-		while (stack_a[1] != smallest)
-			rotate(stack_a, stack_b, 0, operations);
-	}
-	else
-	{
-		while (stack_a[1] != smallest)
-			reverse_rotate(stack_a, stack_b, 0, operations);
-	}
-	push_b(stack_a, stack_b, operations);
-	return ;
-}
-
-void	sort(int *stack_a, int * stack_b, short *operations)
-{
-	while (stack_a[0] > 0)
-		slow_sort(stack_a, stack_b, operations);
-	while (stack_b[0] > 0)
-		push_a(stack_a, stack_b, operations);
 	return ;
 }
 
@@ -142,6 +103,9 @@ void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
 		while (i++ < (stack_b[0] + moves[1] - 1))
 			reverse_rotate(stack_a, stack_b, 1, operations);
 		push_b(stack_a, stack_b, operations);
+		i = find_max(stack_b);
+		while (stack_b[1] != i)
+			rotate(stack_a, stack_b, 1, operations);
 	}
 }
 

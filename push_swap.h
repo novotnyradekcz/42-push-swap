@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:38:50 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/09/17 20:18:31 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:25:18 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void	read_operations(short *operations);
 void	optimise_operations(short *operations);
 int		operation_sums(short *operations, int i, int sum);
 void	write_operation(short i);
+void	optimise_rr(short *operations);
+void	shift(short *operations, int i, int j);
 
 #endif
