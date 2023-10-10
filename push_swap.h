@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:38:50 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/09 17:25:18 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:38:32 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,30 @@
 int		main(int argc, char **argv);
 int		check_input(int length, char **input);
 void	process_stack(int argc, char **argv);
-void	sort_stacks(int *stack_a, int *stack_b, short *operations);
+void	sort_stacks(int **stacks, short *operations);
 long	ft_atoi(const char *nptr);
 
-void	swap(int *stack_a, int *stack_b, int to_swap, short *operations);
-void	push_a(int *stack_a, int *stack_b, short *operations);
-void	push_b(int *stack_a, int *stack_b, short *operations);
-void	rotate(int *stack_a, int *stack_b, int to_rotate, short *operations);
-void	reverse_rotate(int *stack_a, int *stack_b, int to_rotate, short *operations);
+void	swap(int **stacks, int to_swap, short *operations);
+void	push_a(int **stacks, short *operations);
+void	push_b(int **stacks, short *operations);
+void	rotate(int **stacks, int to_rotate, short *operations);
+void	reverse_rotate(int **stacks, int to_rotate, short *operations);
 
-int		calculations(int *stack_a, int *stack_b, int number);
+int		calculations(int **stacks, int number);
 int		find_max(int *stack);
-void	sort(int *stack_a, int * stack_b, short *operations);
-void	slow_sort(int *stack_a, int * stack_b, short *operations);
-void	special_cases(int *stack_a, int *stack_b, short *operations);
-void	sorting(int *stack_a, int *stack_b, int *moves, short *operations);
-void	turk_sort(int *stack_a, int *stack_b, short *operations);
+void	sort(int **stacks, short *operations);
+void	slow_sort(int **stacks, short *operations);
+void	special_cases(int **stacks, short *operations);
+void	sorting(int **stacks, int *moves, short *operations);
+void	turk_sort(int **stacks, short *operations);
 
 void	print_stack(int *stack);
 
-void	two(int *stack_a, int *stack_b, short *operations);
-void	three(int *stack_a, int *stack_b, short *operations);
-void	four(int *stack_a, int *stack_b, short *operations);
-void	five(int *stack_a, int *stack_b, short *operations);
-void	five_too(int *stack_a, int *stack_b, short *operations);
+void	two(int **stacks, short *operations);
+void	three(int **stacks, short *operations);
+void	four(int **stacks, short *operations);
+void	five(int **stacks, short *operations);
+void	five_too(int **stacks, short *operations);
 
 void	read_operations(short *operations);
 void	optimise_operations(short *operations);

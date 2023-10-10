@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 09:41:07 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:40:09 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,48 +37,50 @@ long	ft_atoi(const char *nptr)
 	return (neg * res);
 }
 
-void	sort_stacks(int *stack_a, int *stack_b, short *operations)
+void	sort_stacks(int **stacks, short *operations)
 {
 	int	i;
 	
 	i = 1;
-	while (i < stack_a[0])
+	while (i < stacks[0][0])
 	{
-		if (stack_a[i] > stack_a[i + 1])
+		if (stacks[0][i] > stacks[0][i + 1])
 			break ;
 		i++;
 	}
-	if (i == stack_a[0])
+	if (i == stacks[0][0])
 		return ;
-	if (stack_a[0] < 6)
+	if (stacks[0][0] < 6)
 	{
-		special_cases(stack_a, stack_b, operations);
+		special_cases(stacks, operations);
 		return ;
 	}
-	while(stack_a[0] > 0)
+	while(stacks[0][0] > 0)
 	{
-		turk_sort(stack_a, stack_b, operations);
+		turk_sort(stacks, operations);
 		return ;
 	}
 }
 
 void	process_stack(int argc, char **argv)
 {
-	int	*stack_a;
-	int	*stack_b;
+	int		**stacks;
 	short	*operations;
-	int	i;
-	// TODO: idea - merge stack_a and b into one array of arrays stack[][]
-	stack_a = (int *) malloc(argc * sizeof(int));	// leave one extra sport for size
-	stack_b = (int *) malloc(argc * sizeof(int));	// stack_a[0] and stack_b[0] is current size of stack 
+	int		i;
+
+	stacks = (int **) malloc(3 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost
+	stacks[0] = (int *) malloc(argc * sizeof(int));	// leave one extra sport for size
+	stacks[1] = (int *) malloc(argc * sizeof(int));	// stacks[0][0] and stacks[1][0] is current size of stack 
+	stacks[2] = (int *) malloc(argc * sizeof(int));
 	operations = (short *) malloc(100000 * sizeof(short));
 	i = 0;
-	stack_a[0] = argc - 1;
-	stack_b[0] = 0;
+	stacks[0][0] = argc - 1;
+	stacks[1][0] = 0;
+	stacks[2][0] = stacks[0][0];
 	operations[0] = 0;
 	while (i++ < argc - 1)
-		stack_a[i] = ft_atoi(argv[i]);
-	sort_stacks(stack_a, stack_b, operations);
+		stacks[0][i] = ft_atoi(argv[i]);
+	sort_stacks(stacks, operations);
 	read_operations(operations);
 }
 

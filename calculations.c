@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 15:19:46 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:49:07 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 #include <stdio.h>
 
-void	special_cases(int *stack_a, int *stack_b, short *operations)
+void	special_cases(int **stacks, short *operations)
 {
-	if (stack_a[0] == 1)
+	if (stacks[0][0] == 1)
 		return ;
-	if (stack_a[0] == 2)
-		two(stack_a, stack_b, operations);
-	else if (stack_a[0] == 3)
-		three(stack_a, stack_b, operations);
-	else if (stack_a[0] == 4)
-		four(stack_a, stack_b, operations);
+	if (stacks[0][0] == 2)
+		two(stacks, operations);
+	else if (stacks[0][0] == 3)
+		three(stacks, operations);
+	else if (stacks[0][0] == 4)
+		four(stacks, operations);
 	else
-		five(stack_a, stack_b, operations);
+		five(stacks, operations);
 	return ;
 }
 
-int	calculations(int *stack_a, int *stack_b, int number)
+int	calculations(int **stacks, int number)
 {
 	int	i;
 	int	front;
 	int	back;
 
 	i = 1;
-	while (i <= stack_b[0] && stack_b[i] > stack_a[number])
+	while (i <= stacks[1][0] && stacks[1][i] > stacks[0][number])
 		i++;
 	front = i - 1;
-	back = stack_b[0] - front;
+	back = stacks[1][0] - front;
 	back++;
 	back--;
 	// if (front < back)
@@ -74,7 +74,7 @@ void	print_stack(int *stack)
 	printf("\n");
 }
 
-void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
+void	sorting(int **stacks, int *moves, short *operations)
 {
 	int i;
 	
@@ -82,50 +82,50 @@ void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
 	{
 		i = 0;
 		while (i++ < moves[0])
-			rotate(stack_a, stack_b, 0, operations);
+			rotate(stacks, 0, operations);
 		i = 0;
 		while (i++ < moves[1])
-			rotate(stack_a, stack_b, 1, operations);
-		push_b(stack_a, stack_b, operations);
-		i = find_max(stack_b);
-		while (stack_b[1] != i)
-			reverse_rotate(stack_a, stack_b, 1, operations);
+			rotate(stacks, 1, operations);
+		push_b(stacks, operations);
+		i = find_max(stacks[1]);
+		while (stacks[1][1] != i)
+			reverse_rotate(stacks, 1, operations);
 	}
 	if (moves[1] < 0)
 	{
 		i = 0;
-		while (i++ < (stack_a[0] - moves[0] - 1))
-			reverse_rotate(stack_a, stack_b, 0, operations);
+		while (i++ < (stacks[0][0] - moves[0] - 1))
+			reverse_rotate(stacks, 0, operations);
 		i = 0;
-		while (i++ < (stack_b[0] + moves[1] - 1))
-			reverse_rotate(stack_a, stack_b, 1, operations);
-		push_b(stack_a, stack_b, operations);
-		i = find_max(stack_b);
-		while (stack_b[1] != i)
-			rotate(stack_a, stack_b, 1, operations);
+		while (i++ < (stacks[1][0] + moves[1] - 1))
+			reverse_rotate(stacks, 1, operations);
+		push_b(stacks, operations);
+		i = find_max(stacks[1]);
+		while (stacks[1][1] != i)
+			rotate(stacks, 1, operations);
 	}
 }
 
-void	turk_sort(int *stack_a, int *stack_b, short *operations)
+void	turk_sort(int **stacks, short *operations)
 {
 	int	i;
 	int candidate;
 	int *moves;
 
 	moves = (int *) malloc(2 * sizeof(int));
-	push_b(stack_a, stack_b, operations);
-	push_b(stack_a, stack_b, operations);
-	if (stack_b[1] < stack_b[2])
-		swap(stack_a, stack_b, 1, operations);
-	while (stack_a[0])
+	push_b(stacks, operations);
+	push_b(stacks, operations);
+	if (stacks[1][1] < stacks[1][2])
+		swap(stacks, 1, operations);
+	while (stacks[0][0])
 	{
 		i = 0;
-		moves[0] = stack_a[0];
-		moves[1] = stack_b[0];
+		moves[0] = stacks[0][0];
+		moves[1] = stacks[1][0];
 		candidate = 0;
-		while (i++ < stack_a[0])
+		while (i++ < stacks[0][0])
 		{
-			candidate = calculations(stack_a, stack_b, i);
+			candidate = calculations(stacks, i);
 			if ((candidate >= 0 && candidate < moves[1])
 				|| (candidate < 0 && ((-1) * candidate) < moves[1]))
 			{
@@ -133,11 +133,11 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 				moves[1] = candidate;
 			}
 		}
-		sorting(stack_a, stack_b, moves, operations);
+		sorting(stacks, moves, operations);
 	}
-	while (stack_b[0])
-		push_a(stack_a, stack_b, operations);
-	print_stack(stack_a);
+	while (stacks[1][0])
+		push_a(stacks, operations);
+	print_stack(stacks[0]);
 	free(moves);
 }
 
