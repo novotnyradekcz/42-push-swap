@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 15:40:09 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:54:57 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	process_stack(int argc, char **argv)
 	while (i++ < argc - 1)
 		stacks[0][i] = ft_atoi(argv[i]);
 	sort_stacks(stacks, operations);
-	read_operations(operations);
+	read_operations(operations);	// post-optimisation
 }
 
 int	check_input(int length, char **input)

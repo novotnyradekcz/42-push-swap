@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 11:43:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/09 17:55:56 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:56:53 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	read_operations(short *operations)
 	int	i;
 
 	i = 0;
-	optimise_rr(operations);
+	// optimise_rr(operations);
 	optimise_operations(operations);
 	while (i++ < operations[0])
 		write_operation(operations[i]);
