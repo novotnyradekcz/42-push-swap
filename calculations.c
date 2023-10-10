@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/09 16:54:07 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:19:46 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	calculations(int *stack_a, int *stack_b, int number)
 		i++;
 	front = i - 1;
 	back = stack_b[0] - front;
-	printf("%d %d\n", front, back);
+	back++;
+	back--;
 	// if (front < back)
 	// 	return (front);
 	// else
@@ -83,16 +84,12 @@ void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
 		while (i++ < moves[0])
 			rotate(stack_a, stack_b, 0, operations);
 		i = 0;
-		print_stack(stack_b);
 		while (i++ < moves[1])
 			rotate(stack_a, stack_b, 1, operations);
-		print_stack(stack_b);
 		push_b(stack_a, stack_b, operations);
-		print_stack(stack_b);
 		i = find_max(stack_b);
 		while (stack_b[1] != i)
 			reverse_rotate(stack_a, stack_b, 1, operations);
-		print_stack(stack_b);
 	}
 	if (moves[1] < 0)
 	{
@@ -136,26 +133,22 @@ void	turk_sort(int *stack_a, int *stack_b, short *operations)
 				moves[1] = candidate;
 			}
 		}
-		printf("\n%d\n", moves[1]);
 		sorting(stack_a, stack_b, moves, operations);
 	}
-	// i = 0;
-	// candidate = -2147483648;
-	// while (i++ < stack_b[0])
-	// {
-	// 	if (stack_b[i] > candidate)
-	// 		candidate = stack_b[i];
-	// }
-	// while (stack_b[1] != candidate)
-	// 	rotate(stack_a, stack_b, 1, operations);
 	while (stack_b[0])
 		push_a(stack_a, stack_b, operations);
-	i = 0;
-	while (i++ < operations[0])
-		printf("%d\n", operations[i]);
-	i = 0;
-	while (i++ < stack_a[0])
-		printf("%d ", stack_a[i]);
-	printf("\n");
+	print_stack(stack_a);
 	free(moves);
 }
+
+// new approach:
+// stick to moving all numbers from A to B in reverse order and then simply moving them back
+// but
+// before pushing each number, calculate the number of operations it would take
+// simply as how close is this number to the edge of the stack
+// and how much the other stack would need to be shifted
+// if rotating is in the same direction
+// take into account combining ra + rb into rr or rra + rrb into rrr
+// save this score for each number on A
+// then select the one with lowest score and execute operations to move it
+// repeat
