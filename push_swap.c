@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 15:54:57 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:52:51 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,11 @@ void	process_stack(int argc, char **argv)
 	stacks = (int **) malloc(3 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost
 	stacks[0] = (int *) malloc(argc * sizeof(int));	// leave one extra sport for size
 	stacks[1] = (int *) malloc(argc * sizeof(int));	// stacks[0][0] and stacks[1][0] is current size of stack 
-	stacks[2] = (int *) malloc(argc * sizeof(int));
+	stacks[2] = (int *) malloc(argc * sizeof(int));	// her, stacks[2][0] is the position of the largest number
 	operations = (short *) malloc(100000 * sizeof(short));
 	i = 0;
 	stacks[0][0] = argc - 1;
 	stacks[1][0] = 0;
-	stacks[2][0] = stacks[0][0];
 	operations[0] = 0;
 	while (i++ < argc - 1)
 		stacks[0][i] = ft_atoi(argv[i]);

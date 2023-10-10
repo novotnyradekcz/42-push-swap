@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 15:49:07 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:28:11 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,42 @@ int	calculations(int **stacks, int number)
 	return (front);
 }
 
-int	find_max(int *stack)
+int	find_min_max(int *stack, int min_or_max)
 {
 	int	i;
-	int maximum;
+	int extremum;
 
 	i = 0;
-	maximum = stack[1];
-	while (i++ < stack[0])
+	extremum = stack[1];
+	if (min_or_max < 0)
 	{
-		if (stack[i] > maximum)
-			maximum = stack[i];
+		while (i++ < stack[0])
+		{
+			if (stack[i] < extremum)
+				extremum = stack[i];
+		}
 	}
-	return (maximum);
+	else
+	{
+		while (i++ < stack[0])
+		{
+			if (stack[i] > extremum)
+				extremum = stack[i];
+		}
+	}
+	return (extremum);
+}
+
+int	find_offset(int **stacks)
+{
+	int	i;
+	int	max;
+
+	i = 1;
+	max = find_min_max(stacks[1], 1);
+	while (i < stacks[1][0] && stacks[1][i] != max)
+		i++;
+	return (i);
 }
 
 void	print_stack(int *stack)
@@ -87,7 +110,7 @@ void	sorting(int **stacks, int *moves, short *operations)
 		while (i++ < moves[1])
 			rotate(stacks, 1, operations);
 		push_b(stacks, operations);
-		i = find_max(stacks[1]);
+		i = find_min_max(stacks[1], 1);
 		while (stacks[1][1] != i)
 			reverse_rotate(stacks, 1, operations);
 	}
@@ -100,10 +123,18 @@ void	sorting(int **stacks, int *moves, short *operations)
 		while (i++ < (stacks[1][0] + moves[1] - 1))
 			reverse_rotate(stacks, 1, operations);
 		push_b(stacks, operations);
-		i = find_max(stacks[1]);
+		i = find_min_max(stacks[1], 1);
 		while (stacks[1][1] != i)
 			rotate(stacks, 1, operations);
 	}
+}
+
+void	assign_score(int **stacks, int position)
+{
+	int	i;
+
+	
+	stacks[2][position] = ;
 }
 
 void	turk_sort(int **stacks, short *operations)
@@ -123,15 +154,17 @@ void	turk_sort(int **stacks, short *operations)
 		moves[0] = stacks[0][0];
 		moves[1] = stacks[1][0];
 		candidate = 0;
+		stacks[2][0] = find_offset(stacks);
 		while (i++ < stacks[0][0])
 		{
-			candidate = calculations(stacks, i);
-			if ((candidate >= 0 && candidate < moves[1])
-				|| (candidate < 0 && ((-1) * candidate) < moves[1]))
-			{
-				moves[0] = i - 1;
-				moves[1] = candidate;
-			}
+			assign_score(stacks, i);
+			// candidate = calculations(stacks, i);
+			// if ((candidate >= 0 && candidate < moves[1])
+			// 	|| (candidate < 0 && ((-1) * candidate) < moves[1]))
+			// {
+			// 	moves[0] = i - 1;
+			// 	moves[1] = candidate;
+			// }
 		}
 		sorting(stacks, moves, operations);
 	}
