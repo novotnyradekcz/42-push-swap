@@ -68,10 +68,12 @@ void	process_stack(int argc, char **argv)
 	short	*operations;
 	int		i;
 
-	stacks = (int **) malloc(3 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost
+	stacks = (int **) malloc(3 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost, 3 - position of number in B that needs to be on top, 4 - operations (1: rr, 2: rrr, 4: ra, rrb, 8: rra, rb)
 	stacks[0] = (int *) malloc(argc * sizeof(int));	// leave one extra sport for size
 	stacks[1] = (int *) malloc(argc * sizeof(int));	// stacks[0][0] and stacks[1][0] is current size of stack 
-	stacks[2] = (int *) malloc(argc * sizeof(int));	// her, stacks[2][0] is the position of the largest number
+	stacks[2] = (int *) malloc(argc * sizeof(int));	// here, stacks[2][0] is the position of the largest number
+	stacks[3] = (int *) malloc(argc * sizeof(int));	// here, stacks[3][0] is position of the minimum of stacks[2]
+	stacks[4] = (int *) malloc(argc * sizeof(int));	// here, stacks[4][0] has no function
 	operations = (short *) malloc(100000 * sizeof(short));
 	i = 0;
 	stacks[0][0] = argc - 1;
