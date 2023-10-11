@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/11 19:09:37 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/11 22:48:51 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,20 @@ int	calculations(int **stacks, int number)
 	return (front);
 }
 
-int	find_min_index(int *stack)
+int	find_min_index(int **stacks)
 {
 	int	i;
 	int	min;
 	int	index;
 
 	i = 0;
-	min = stack[1];
-	index = 0;
-	while (i++ < stack[0])
+	min = stacks[2][1];
+	index = 1;
+	while (i++ < stacks[0][0])
 	{
-		if (stack[i] < min)
+		if (stacks[2][i] < min)
 		{
-			min = stack[i];
+			min = stacks[2][i];
 			index = i;
 		}
 	}
@@ -107,13 +107,29 @@ int	find_offset(int **stacks)
 	return (i);
 }
 
-void	print_stack(int *stack)
+void	print_stacks(int **stacks)
 {
 	int	i;
 
-	i = 0;
-	while (i++ < stack[0])
-		printf("%d ", stack[i]);
+	i = -1;
+	while (i++ < stacks[0][0])
+		printf("%d ", stacks[0][i]);
+	printf("\n");
+	i = -1;
+	while (i++ < stacks[1][0])
+		printf("%d ", stacks[1][i]);
+	printf("\n");
+	i = -1;
+	while (i++ < stacks[0][0])
+		printf("%d ", stacks[2][i]);
+	printf("\n");
+	i = -1;
+	while (i++ < stacks[0][0])
+		printf("%d ", stacks[3][i]);
+	printf("\n");
+	i = -1;
+	while (i++ < stacks[0][0])
+		printf("%d ", stacks[4][i]);
 	printf("\n");
 }
 
@@ -162,9 +178,9 @@ void	calculate_score(int **stacks, int a, int b)
 			min = a + 1;
 			moves = 1;	// rr
 		}
-		if (stacks[1][0] - b + 2 < min)
+		if (stacks[1][0] - b + 1 < min)
 		{
-			min = stacks[1][0] - b + 2;
+			min = stacks[1][0] - b + 1;
 			moves = 2;	// rrr
 		}
 	}
@@ -175,28 +191,25 @@ void	calculate_score(int **stacks, int a, int b)
 			min = b + 1;
 			moves = 1;	// rr
 		}
-		if (stacks[0][0] - a + 2 < min)
+		if (stacks[0][0] - a + 1 < min)
 		{
-			min = stacks[0][0] - a + 2;
+			min = stacks[0][0] - a + 1;
 			moves = 2;	// rrr
 		}
 	}
-	if (a + stacks[1][0] - b + 2 < min)
+	if (a + stacks[1][0] - b + 1 < min)
 	{
-		min = a + stacks[1][0] - b + 2;
+		min = a + stacks[1][0] - b + 1;
 		moves = 4;	// ra, rrb
 	}
-	if (b + stacks[0][0] - a + 2 < min)
+	if (b + stacks[0][0] - a + 1 < min)
 	{
-		min = b + stacks[0][0] - a + 2;
+		min = b + stacks[0][0] - a + 1;
 		moves = 8;	// rra, rb
 	}
-	printf("calculate_score, after ifs\n");
 	stacks[2][a + 1] = min;
 	stacks[3][a + 1] = b + 1;
-	printf("calculate_score, before stacks[4]\n");
 	stacks[4][a + 1] = moves;
-	printf("calculate_score, end\n");
 }
 
 void	assign_score(int **stacks, int position)
@@ -218,9 +231,7 @@ void	assign_score(int **stacks, int position)
 		if (i >= stacks[1][0])
 			i = 1;
 	}
-	printf("assign_score, before calculate_score\n");
 	calculate_score(stacks, position - 1, i - 1);
-	printf("assign_score, after calculate_score\n");
 }
 
 void	move(int **stacks, short *operations)
@@ -230,7 +241,7 @@ void	move(int **stacks, short *operations)
 	int	b;
 
 	i = 0;
-	if (stacks[3][stacks[3][0]] == 1)
+	if (stacks[4][stacks[3][0]] == 1)
 	{
 		a = stacks[0][stacks[3][0]];
 		b = stacks[1][stacks[4][0]];
@@ -238,40 +249,40 @@ void	move(int **stacks, short *operations)
 		{
 			while (++i < a)
 				rotate(stacks, -1, operations);
-			while (++i < b)
+			while (i++ < b)
 				rotate(stacks, 1, operations);
 		}
 		else
 		{
 			while (++i < b)
 				rotate(stacks, -1, operations);
-			while (++i < a)
+			while (i++ < a)
 				rotate(stacks, 0, operations);
 		}
 	}
-	if (stacks[3][stacks[3][0]] == 2)
+	if (stacks[4][stacks[3][0]] == 2)
 	{
-		a = stacks[0][0] - stacks[0][stacks[3][0]] + 1;
-		b = stacks[1][0] - stacks[1][stacks[4][0]] + 1;
+		a = stacks[0][0] - stacks[0][stacks[3][0]] + 2;
+		b = stacks[1][0] - stacks[1][stacks[4][0]] + 2;
 		if (a < b)
 		{
-			while (i++ < a)
+			while (++i < a)
 				reverse_rotate(stacks, -1, operations);
 			while (i++ < b)
 				reverse_rotate(stacks, 1, operations);
 		}
 		else
 		{
-			while (i++ < b)
+			while (++i < b)
 				reverse_rotate(stacks, -1, operations);
 			while (i++ < a)
 				reverse_rotate(stacks, 0, operations);
 		}
 	}
-	if (stacks[3][stacks[3][0]] == 4)
+	if (stacks[4][stacks[3][0]] == 4)
 	{
 		a = stacks[0][stacks[3][0]];
-		b = stacks[1][0] - stacks[1][stacks[4][0]] + 1;
+		b = stacks[1][0] - stacks[1][stacks[4][0]] + 2;
 		while (++i < a)
 			rotate(stacks, 0, operations);
 		i = 0;
@@ -279,14 +290,14 @@ void	move(int **stacks, short *operations)
 			reverse_rotate(stacks, 1, operations);
 
 	}
-	if (stacks[3][stacks[3][0]] == 8)
+	if (stacks[4][stacks[3][0]] == 8)
 	{
-		a = stacks[0][0] - stacks[0][stacks[3][0]] + 1;
+		a = stacks[0][0] - stacks[0][stacks[3][0]] + 2;
 		b = stacks[1][stacks[4][0]];
-		while (i++ < a)
+		while (++i < a)
 			reverse_rotate(stacks, 0, operations);
 		i = 0;
-		while (++i < b)
+		while (i++ < b)
 			rotate(stacks, 1, operations);
 	}
 	push_b(stacks, operations);
@@ -302,21 +313,21 @@ void	turk_sort(int **stacks, short *operations)
 		// swap(stacks, 1, operations);
 	while (stacks[0][0])
 	{
-		printf("turk_sort, start of loop\n");
 		i = 0;
 		stacks[2][0] = find_offset(stacks);
-		printf("turk_sort, after find_offset\n");
 		while (i++ < stacks[0][0])
 			assign_score(stacks, i);
-		printf("turk_sort, after assign_score\n");
-		stacks[3][0] = find_min_index(stacks[2]);
+		stacks[3][0] = find_min_index(stacks);
 		stacks[4][0] = stacks[3][stacks[3][0]];
+		printf("printing stacks:\n");
+		print_stacks(stacks);
 		move(stacks, operations);
 		printf("turk_sort, end of loop\n");
 	}
 	while (stacks[1][0])
 		push_a(stacks, operations);
-	print_stack(stacks[0]);
+	printf("turk_sort, end of function, final printing:\n");
+	print_stacks(stacks);
 }
 
 // new approach:

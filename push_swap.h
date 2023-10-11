@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:38:50 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/11 18:16:25 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:32:01 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	reverse_rotate(int **stacks, int to_rotate, short *operations);
 
 int		calculations(int **stacks, int number);
 int		find_min_max(int *stack, int min_or_max);
-int		find_min_index(int *stack);
+int		find_min_index(int **stacks);
 void	sort(int **stacks, short *operations);
 void	slow_sort(int **stacks, short *operations);
 void	special_cases(int **stacks, short *operations);
@@ -41,7 +41,7 @@ void	assign_score(int **stacks, int position);
 void	calculate_score(int **stacks, int a, int b);
 int		find_offset(int **stacks);
 
-void	print_stack(int *stack);
+void	print_stacks(int **stacks);
 
 void	two(int **stacks, short *operations);
 void	three(int **stacks, short *operations);
