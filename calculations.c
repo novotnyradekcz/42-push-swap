@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/11 22:48:51 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/11 23:58:49 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,21 +215,20 @@ void	calculate_score(int **stacks, int a, int b)
 void	assign_score(int **stacks, int position)
 {
 	int	i;
-	int	max;
 
 	i = stacks[2][0];
-	max = find_min_max(stacks[1], 1);
-	if (stacks[0][position] > max)
-		i = find_offset(stacks) - 1;
-	if (i == stacks[1][0])
-		i = 1;
-	else
-		i++;
-	while (stacks[0][position] < stacks[1][i] && stacks[1][i] != max)
+	// if (i == stacks[1][0])
+	// 	i = 1;
+	// else
+	// 	i++;
+	if (stacks[0][position] > find_min_max(stacks[1], -1))
 	{
-		i++;
-		if (i >= stacks[1][0])
-			i = 1;
+		while (stacks[0][position] < stacks[1][i])
+		{
+			i++;
+			if (i > stacks[1][0])
+				i = 1;
+		}
 	}
 	calculate_score(stacks, position - 1, i - 1);
 }
@@ -243,8 +242,8 @@ void	move(int **stacks, short *operations)
 	i = 0;
 	if (stacks[4][stacks[3][0]] == 1)
 	{
-		a = stacks[0][stacks[3][0]];
-		b = stacks[1][stacks[4][0]];
+		a = stacks[3][0];
+		b = stacks[4][0];
 		if (a < b)
 		{
 			while (++i < a)
@@ -262,8 +261,8 @@ void	move(int **stacks, short *operations)
 	}
 	if (stacks[4][stacks[3][0]] == 2)
 	{
-		a = stacks[0][0] - stacks[0][stacks[3][0]] + 2;
-		b = stacks[1][0] - stacks[1][stacks[4][0]] + 2;
+		a = stacks[0][0] - stacks[3][0] + 2;
+		b = stacks[1][0] - stacks[4][0] + 2;
 		if (a < b)
 		{
 			while (++i < a)
@@ -281,23 +280,23 @@ void	move(int **stacks, short *operations)
 	}
 	if (stacks[4][stacks[3][0]] == 4)
 	{
-		a = stacks[0][stacks[3][0]];
-		b = stacks[1][0] - stacks[1][stacks[4][0]] + 2;
+		a = stacks[3][0];
+		b = stacks[1][0] - stacks[4][0] + 2;
 		while (++i < a)
 			rotate(stacks, 0, operations);
 		i = 0;
-		while (i++ < b)
+		while (++i < b)
 			reverse_rotate(stacks, 1, operations);
 
 	}
 	if (stacks[4][stacks[3][0]] == 8)
 	{
-		a = stacks[0][0] - stacks[0][stacks[3][0]] + 2;
+		a = stacks[0][0] - stacks[3][0] + 2;
 		b = stacks[1][stacks[4][0]];
 		while (++i < a)
 			reverse_rotate(stacks, 0, operations);
 		i = 0;
-		while (i++ < b)
+		while (++i < b)
 			rotate(stacks, 1, operations);
 	}
 	push_b(stacks, operations);
@@ -323,6 +322,18 @@ void	turk_sort(int **stacks, short *operations)
 		print_stacks(stacks);
 		move(stacks, operations);
 		printf("turk_sort, end of loop\n");
+	}
+	i = 0;
+	stacks[2][0] = find_offset(stacks);
+	if (stacks[2][0] <= stacks[1][0] / 2 + 1)
+	{
+		while (++i < stacks[2][0])
+			rotate(stacks, 1, operations);
+	}
+	else
+	{
+		while (i++ < stacks[1][0] - stacks[2][0] + 1)
+			reverse_rotate(stacks, 1, operations);
 	}
 	while (stacks[1][0])
 		push_a(stacks, operations);
