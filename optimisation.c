@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 11:43:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 15:56:53 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:51:54 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // #include <stdlib.h>
 // #include <unistd.h>
 
-int	operation_sums(short *operations, int i, int sum)
+int	operation_sums(unsigned short *operations, int i, int sum)
 {
 	int	j;
 
@@ -36,7 +36,7 @@ int	operation_sums(short *operations, int i, int sum)
 }
 
 
-void	optimise_operations(short *operations)
+void	optimise_operations(unsigned short *operations)
 {
 	int	i;
 	int	j;
@@ -63,7 +63,7 @@ void	optimise_operations(short *operations)
 	}
 }
 
-void	shift(short *operations, int i, int j)
+void	shift(unsigned short *operations, int i, int j)
 {
 	int	k;
 
@@ -75,7 +75,7 @@ void	shift(short *operations, int i, int j)
 	operations[0] -= 2;
 }
 
-void	optimise_rr(short *operations)
+void	optimise_rr(unsigned short *operations)
 {
 	int	i;
 	int	j;
@@ -128,7 +128,7 @@ void	write_operation(short i)
 		write(1, "rrr\n", 4);
 }
 
-void	read_operations(short *operations)
+void	read_operations(unsigned short *operations)
 {
 	int	i;
 

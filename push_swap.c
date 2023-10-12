@@ -6,11 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/11 19:07:17 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:05:54 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+#include <stdio.h>
 
 long	ft_atoi(const char *nptr)
 {
@@ -37,7 +39,7 @@ long	ft_atoi(const char *nptr)
 	return (neg * res);
 }
 
-void	sort_stacks(int **stacks, short *operations)
+void	sort_stacks(int **stacks, unsigned short *operations)
 {
 	int	i;
 	
@@ -64,9 +66,9 @@ void	sort_stacks(int **stacks, short *operations)
 
 void	process_stack(int argc, char **argv)
 {
-	int		**stacks;
-	short	*operations;
-	int		i;
+	int				**stacks;
+	unsigned short	*operations;
+	int				i;
 
 	stacks = (int **) malloc(5 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost, 3 - position of number in B that needs to be on top, 4 - operations (1: rr, 2: rrr, 4: ra, rrb, 8: rra, rb)
 	stacks[0] = (int *) malloc(argc * sizeof(int));	// leave one extra spot for size
@@ -74,7 +76,7 @@ void	process_stack(int argc, char **argv)
 	stacks[2] = (int *) malloc(argc * sizeof(int));	// here, stacks[2][0] is the position of the largest number
 	stacks[3] = (int *) malloc(argc * sizeof(int));	// here, stacks[3][0] is position of the minimum of stacks[2]
 	stacks[4] = (int *) malloc(argc * sizeof(int));	// here, stacks[4][0] has the value from stacks[3] corresponding to stacks[3][0] (=stacks[3][stacks[3][0]])
-	operations = (short *) malloc(100000 * sizeof(short));
+	operations = (unsigned short *) malloc(65536 * sizeof(unsigned short));
 	i = 0;
 	stacks[0][0] = argc - 1;
 	stacks[1][0] = 0;
@@ -83,6 +85,8 @@ void	process_stack(int argc, char **argv)
 		stacks[0][i] = ft_atoi(argv[i]);
 	sort_stacks(stacks, operations);
 	read_operations(operations);	// post-optimisation
+	printf("process_stack, final printing:\n");
+	print_stacks(stacks);
 }
 
 int	check_input(int length, char **input)

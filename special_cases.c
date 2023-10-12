@@ -6,13 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 19:03:16 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 15:42:19 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:43:22 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	two(int **stacks, short *operations)
+void	two(int **stacks, unsigned short *operations)
 {
 	if (stacks[0][1] < stacks[0][2])
 		return ;
@@ -20,7 +20,7 @@ void	two(int **stacks, short *operations)
 	return ;
 }
 
-void	three(int **stacks, short *operations)
+void	three(int **stacks, unsigned short *operations)
 {
 	if (stacks[0][1] < stacks[0][2])
 	{
@@ -46,7 +46,7 @@ void	three(int **stacks, short *operations)
 	return ;
 }
 
-void	four(int **stacks, short *operations)
+void	four(int **stacks, unsigned short *operations)
 {
 	push_b(stacks, operations);
 	three(stacks, operations);
@@ -73,7 +73,7 @@ void	four(int **stacks, short *operations)
 	return ;
 }
 
-void	five(int **stacks, short *operations)
+void	five(int **stacks, unsigned short *operations)
 {
 	push_b(stacks, operations);
 	four(stacks, operations);
@@ -98,7 +98,7 @@ void	five(int **stacks, short *operations)
 	return ;
 }
 
-void	five_too(int **stacks, short *operations)
+void	five_too(int **stacks, unsigned short *operations)
 {
 	if (stacks[1][1] < stacks[0][4])
 	{
