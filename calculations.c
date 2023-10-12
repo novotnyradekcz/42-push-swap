@@ -6,27 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 16:45:09 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:46:40 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 #include <stdio.h>
-
-void	special_cases(int **stacks, unsigned short *operations)
-{
-	if (stacks[0][0] == 1)
-		return ;
-	if (stacks[0][0] == 2)
-		two(stacks, operations);
-	else if (stacks[0][0] == 3)
-		three(stacks, operations);
-	else if (stacks[0][0] == 4)
-		four(stacks, operations);
-	else
-		five(stacks, operations);
-}
 
 int	find_min_index(int **stacks)
 {
@@ -86,189 +72,29 @@ int	find_offset(int **stacks)
 	return (i);
 }
 
-void	print_stacks(int **stacks)
+long	ft_atoi(const char *nptr)
 {
-	int	i;
+	int		i;
+	int		neg;
+	long	res;
 
-	i = -1;
-	while (i++ < stacks[0][0])
-		printf("%d ", stacks[0][i]);
-	printf("\n");
-	i = -1;
-	while (i++ < stacks[1][0])
-		printf("%d ", stacks[1][i]);
-	printf("\n");
-	i = -1;
-	while (i++ < stacks[0][0])
-		printf("%d ", stacks[2][i]);
-	printf("\n");
-	i = -1;
-	while (i++ < stacks[0][0])
-		printf("%d ", stacks[3][i]);
-	printf("\n");
-	i = -1;
-	while (i++ < stacks[0][0])
-		printf("%d ", stacks[4][i]);
-	printf("\n");
-}
-
-void	calculate_score(int **stacks, int a, int b)
-{
-	int	min;
-	int	moves;
-
-	min = stacks[0][0] + stacks[1][0];
-	if (a >= b && a + 1 < min)
-	{
-		min = a + 1;
-		moves = 1;	// rr
-	}
-	if (stacks[1][0] - b >= stacks[0][0] - a && stacks[1][0] - b + 1 < min)
-	{
-		min = stacks[1][0] - b + 1;
-		moves = 2;	// rrr
-	}
-	if (a <= b && b + 1 < min)
-	{
-		min = b + 1;
-		moves = 1;	// rr
-	}
-	if (stacks[1][0] - b <= stacks[0][0] - a && stacks[0][0] - a + 1 < min)
-	{
-		min = stacks[0][0] - a + 1;
-		moves = 2;	// rrr
-	}
-	if (a + stacks[1][0] - b + 1 < min)
-	{
-		min = a + stacks[1][0] - b + 1;
-		moves = 4;	// ra, rrb
-	}
-	if (b + stacks[0][0] - a + 1 < min)
-	{
-		min = b + stacks[0][0] - a + 1;
-		moves = 8;	// rra, rb
-	}
-	stacks[2][a + 1] = min;
-	stacks[3][a + 1] = b + 1;
-	stacks[4][a + 1] = moves;
-}
-
-void	assign_score(int **stacks, int position)
-{
-	int	i;
-
-	i = stacks[2][0];
-	if (stacks[0][position] > find_min_max(stacks[1], -1))
-	{
-		while (stacks[0][position] < stacks[1][i])
-		{
-			i++;
-			if (i > stacks[1][0])
-				i = 1;
-		}
-	}
-	calculate_score(stacks, position - 1, i - 1);
-}
-
-void	move(int **stacks, unsigned short *operations)
-{
-	int	i;
-	int	a;
-	int	b;
-
+	neg = 1;
+	res = 0;
 	i = 0;
-	if (stacks[4][stacks[3][0]] == 1)
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		a = stacks[3][0];
-		b = stacks[4][0];
-		if (a < b)
-		{
-			while (++i < a)
-				rotate(stacks, -1, operations);
-			while (i++ < b)
-				rotate(stacks, 1, operations);
-		}
-		else
-		{
-			while (++i < b)
-				rotate(stacks, -1, operations);
-			while (i++ < a)
-				rotate(stacks, 0, operations);
-		}
+		if (nptr[i] == '-')
+			neg = -neg;
+		i++;
 	}
-	if (stacks[4][stacks[3][0]] == 2)
+	while (nptr[i] >= 48 && nptr[i] <= 57)
 	{
-		a = stacks[0][0] - stacks[3][0] + 2;
-		b = stacks[1][0] - stacks[4][0] + 2;
-		if (a < b)
-		{
-			while (++i < a)
-				reverse_rotate(stacks, -1, operations);
-			while (i++ < b)
-				reverse_rotate(stacks, 1, operations);
-		}
-		else
-		{
-			while (++i < b)
-				reverse_rotate(stacks, -1, operations);
-			while (i++ < a)
-				reverse_rotate(stacks, 0, operations);
-		}
+		res = res * 10 + (nptr[i] - 48);
+		i++;
 	}
-	if (stacks[4][stacks[3][0]] == 4)
-	{
-		a = stacks[3][0];
-		b = stacks[1][0] - stacks[4][0] + 2;
-		while (++i < a)
-			rotate(stacks, 0, operations);
-		i = 0;
-		while (++i < b)
-			reverse_rotate(stacks, 1, operations);
-
-	}
-	if (stacks[4][stacks[3][0]] == 8)
-	{
-		a = stacks[0][0] - stacks[3][0] + 2;
-		b = stacks[4][0];
-		while (++i < a)
-			reverse_rotate(stacks, 0, operations);
-		i = 0;
-		while (++i < b)
-			rotate(stacks, 1, operations);
-	}
-	push_b(stacks, operations);
-}
-
-void	turk_sort(int **stacks, unsigned short *operations)
-{
-	int	i;
-
-	push_b(stacks, operations);
-	push_b(stacks, operations);
-	while (stacks[0][0])
-	{
-		i = 0;
-		stacks[2][0] = find_offset(stacks);
-		while (i++ < stacks[0][0])
-			assign_score(stacks, i);
-		stacks[3][0] = find_min_index(stacks);
-		stacks[4][0] = stacks[3][stacks[3][0]];
-		move(stacks, operations);
-	}
-	i = 0;
-	stacks[2][0] = find_offset(stacks);
-	if (stacks[2][0] <= stacks[1][0] / 2 + 1)
-	{
-		while (++i < stacks[2][0])
-			rotate(stacks, 1, operations);
-	}
-	else
-	{
-		while (i++ < stacks[1][0] - stacks[2][0] + 1)
-			reverse_rotate(stacks, 1, operations);
-	}
-	while (stacks[1][0])
-		push_a(stacks, operations);
+	return (neg * res);
 }
 
 // new approach:
