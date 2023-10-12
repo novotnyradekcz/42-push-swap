@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 15:04:46 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:04:51 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,7 +305,8 @@ void	move(int **stacks, unsigned short *operations)
 	if (stacks[4][stacks[3][0]] == 8)
 	{
 		a = stacks[0][0] - stacks[3][0] + 2;
-		b = stacks[1][stacks[4][0]];
+		b = stacks[4][0];
+		// printf("a = %d, b = %d\n", a, b);
 		while (++i < a)
 			reverse_rotate(stacks, 0, operations);
 		i = 0;
@@ -337,7 +338,6 @@ void	turk_sort(int **stacks, unsigned short *operations)
 		// print_stacks(stacks);
 		// printf("turk_sort, before move\n");
 		move(stacks, operations);
-		// printf("turk_sort, after move\n");
 		// printf("turk_sort, after move\n");
 		// print_stacks(stacks);
 		// printf("turk_sort, end of loop\n");
