@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 16:36:16 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:34:34 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,9 @@ void	sort_stacks(int **stacks, unsigned short *operations)
 	if (i == stacks[0][0])
 		return ;
 	if (stacks[0][0] < 6)
-	{
 		special_cases(stacks, operations);
-		return ;
-	}
-	while(stacks[0][0] > 0)
-	{
+	else
 		turk_sort(stacks, operations);
-		return ;
-	}
 }
 
 void	process_stack(int argc, char **argv)
@@ -70,23 +64,21 @@ void	process_stack(int argc, char **argv)
 	unsigned short	*operations;
 	int				i;
 
+	i = -1;
 	stacks = (int **) malloc(5 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost, 3 - position of number in B that needs to be on top, 4 - operations (1: rr, 2: rrr, 4: ra, rrb, 8: rra, rb)
-	stacks[0] = (int *) malloc(argc * sizeof(int));	// leave one extra spot for size
-	stacks[1] = (int *) malloc(argc * sizeof(int));	// stacks[0][0] and stacks[1][0] is current size of stack 
-	stacks[2] = (int *) malloc(argc * sizeof(int));	// here, stacks[2][0] is the position of the largest number
-	stacks[3] = (int *) malloc(argc * sizeof(int));	// here, stacks[3][0] is position of the minimum of stacks[2]
-	stacks[4] = (int *) malloc(argc * sizeof(int));	// here, stacks[4][0] has the value from stacks[3] corresponding to stacks[3][0] (=stacks[3][stacks[3][0]])
+	while (i++ < 4)
+		stacks[i] = (int *) malloc(argc * sizeof(int));
 	operations = (unsigned short *) malloc(65536 * sizeof(unsigned short));
-	i = 0;
 	stacks[0][0] = argc - 1;
 	stacks[1][0] = 0;
 	operations[0] = 0;
+	i = 0;
 	while (i++ < argc - 1)
 		stacks[0][i] = ft_atoi(argv[i]);
 	sort_stacks(stacks, operations);
 	read_operations(operations);	// post-optimisation
 	printf("process_stack, final printing:\n");
-	print_stacks(stacks);
+	print_stacks(stacks);	// final check, do not forge to remove this!
 	i = -1;
 	while (i++ < 4)
 		free(stacks[i]);
@@ -145,3 +137,8 @@ int	main(int argc, char **argv)
 	process_stack(argc, argv);
 	return (0);
 }
+
+// stacks[0][0] and stacks[1][0] is current size of stack 
+// stacks[2][0] is the position of the largest number
+// stacks[3][0] is position of the minimum of stacks[2]
+// stacks[4][0] has the value from stacks[3] corresponding to stacks[3][0] (=stacks[3][stacks[3][0]])

@@ -6,15 +6,11 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 11:43:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 13:51:54 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:49:45 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <unistd.h>
 
 int	operation_sums(unsigned short *operations, int i, int sum)
 {
@@ -63,45 +59,6 @@ void	optimise_operations(unsigned short *operations)
 	}
 }
 
-void	shift(unsigned short *operations, int i, int j)
-{
-	int	k;
-
-	k = i - 1;
-	while (++k < j)
-		operations[k] = operations[k + 1];
-	while (++k < operations[0])
-		operations[k - 1] = operations[k + 1];
-	operations[0] -= 2;
-}
-
-void	optimise_rr(unsigned short *operations)
-{
-	int	i;
-	int	j;
-	int	sum;
-
-	i = 0;
-	while (i++ < operations[0])
-	{
-		if (operations[i] >= 32)
-		{
-			j = i;
-			while (j < operations[0] && operations[j] >= 32)
-			{
-				sum = operations[i] + operations[j];
-				if (sum == 288 || sum == 576)
-				{
-					shift(operations, i, j);
-					j--;
-				}
-				else
-					j++;
-			}
-		}
-	}
-}
-
 void	write_operation(short i)
 {
 	if (i == 1)
@@ -133,35 +90,7 @@ void	read_operations(unsigned short *operations)
 	int	i;
 
 	i = 0;
-	// optimise_rr(operations);
 	optimise_operations(operations);
 	while (i++ < operations[0])
 		write_operation(operations[i]);
 }
-
-// int	main(void)
-// {
-// 	short	*operations;
-// 	operations = malloc(sizeof(short) * 11);
-// 	operations[0] = 10;
-// 	operations[1] = 4;
-// 	operations[2] = 8;
-// 	operations[3] = 16;
-// 	operations[4] = 32;
-// 	operations[5] = 4;
-// 	operations[6] = 4;
-// 	operations[7] = 2;
-// 	operations[8] = 1;
-// 	operations[9] = 1;
-// 	operations[10] = 2;
-
-// 	int i = 0;
-// 	while (i++ < operations[0])
-// 		printf("%d ", operations[i]);
-// 	read_operations(operations);
-// 	printf("\n");
-// 	i = 0;
-// 	while (i++ < operations[0])
-// 		printf("%d ", operations[i]);
-// 	free(operations);
-// }

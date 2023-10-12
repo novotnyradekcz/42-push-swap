@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 16:14:53 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:45:09 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,38 +110,6 @@ void	print_stacks(int **stacks)
 	while (i++ < stacks[0][0])
 		printf("%d ", stacks[4][i]);
 	printf("\n");
-}
-
-void	sorting(int **stacks, int *moves, unsigned short *operations)
-{
-	int i;
-	
-	if (moves[1] >= 0)
-	{
-		i = 0;
-		while (i++ < moves[0])
-			rotate(stacks, 0, operations);
-		i = 0;
-		while (i++ < moves[1])
-			rotate(stacks, 1, operations);
-		push_b(stacks, operations);
-		i = find_min_max(stacks[1], 1);
-		while (stacks[1][1] != i)
-			reverse_rotate(stacks, 1, operations);
-	}
-	if (moves[1] < 0)
-	{
-		i = 0;
-		while (i++ < (stacks[0][0] - moves[0] - 1))
-			reverse_rotate(stacks, 0, operations);
-		i = 0;
-		while (i++ < (stacks[1][0] + moves[1] - 1))
-			reverse_rotate(stacks, 1, operations);
-		push_b(stacks, operations);
-		i = find_min_max(stacks[1], 1);
-		while (stacks[1][1] != i)
-			rotate(stacks, 1, operations);
-	}
 }
 
 void	calculate_score(int **stacks, int a, int b)
