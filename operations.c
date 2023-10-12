@@ -6,11 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 21:11:42 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 16:34:38 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:32:31 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// #include <stdio.h>
 
 void	swap(int **stacks, int to_swap, short *operations)
 {
@@ -84,6 +86,7 @@ void	rotate(int **stacks, int to_rotate, short *operations)
 			stacks[0][i] = stacks[0][i + 1];
 		stacks[0][i] = tmp;
 	}
+	i = 0;
 	if (to_rotate == 1 || to_rotate == -1)
 	{
 		tmp = stacks[1][1];
@@ -113,6 +116,7 @@ void	reverse_rotate(int **stacks, int to_rotate, short *operations)
 			stacks[0][i + 1] = stacks[0][i];
 		stacks[0][1] = tmp;
 	}
+	i = 0;
 	if (to_rotate == 1 || to_rotate == -1)
 	{
 		tmp = stacks[1][stacks[1][0]];
@@ -129,3 +133,33 @@ void	reverse_rotate(int **stacks, int to_rotate, short *operations)
 		operations[operations[0] + 1] = 1024;
 	operations[0]++;
 }
+
+// void	print_stacks(int stacks[2][21])
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while (i++ < stacks[0][0])
+// 		printf("%d ", stacks[0][i]);
+// 	printf("\n");
+// 	i = -1;
+// 	while (i++ < stacks[1][0])
+// 		printf("%d ", stacks[1][i]);
+// 	printf("\n");
+// }
+
+// int	main(void)
+// {
+// 	short	operations[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+// 	int	stacks[2][21] =
+// 	{
+// 		{9, 1, 17, 27, 13, 14, 5, 16, 11, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+// 		{11, 9, 8, 6, 4, 2, 20, 19, 18, 12, 15, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+// 	};
+// 	push_b(stacks, operations);
+// 	// push_b(stacks, operations);
+// 	// push_b(stacks, operations);
+// 	// push_b(stacks, operations);
+// 	// push_b(stacks, operations);
+// 	print_stacks(stacks);
+// }

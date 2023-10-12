@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/11 23:58:49 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:24:53 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,6 +321,8 @@ void	turk_sort(int **stacks, short *operations)
 		printf("printing stacks:\n");
 		print_stacks(stacks);
 		move(stacks, operations);
+		printf("turk_sort, after move\n");
+		print_stacks(stacks);
 		printf("turk_sort, end of loop\n");
 	}
 	i = 0;
