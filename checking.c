@@ -6,11 +6,16 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:50:58 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/13 16:57:43 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/15 00:23:09 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	check_result(int **stacks)
+{
+	
+}
 
 int	check_duplicates(int length, char **input)
 {
