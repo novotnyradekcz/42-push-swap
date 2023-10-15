@@ -6,15 +6,31 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:50:58 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/15 00:23:09 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:17:41 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_result(int **stacks)
+void	check_result(int **stacks)
 {
-	
+	int	i;
+
+	i = 0;
+	if (stacks[1][0])
+	{
+		write(1, "KO\n", 3);
+		return ;
+	}
+	while (++i < stacks[0][0])
+	{
+		if (stacks[0][i] > stacks[0][i + 1])
+		{
+			write(1, "KO\n", 3);
+			return ;
+		}
+	}
+	write(1, "OK\n", 3);
 }
 
 int	check_duplicates(int length, char **input)
@@ -72,10 +88,7 @@ int	initial_checks(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	if (check_input(argc, argv))
-	{
-		write(2, "Error\n", 6);
 		return (1);
-	}
 	i = 0;
 	while (++i < argc)
 	{
@@ -86,9 +99,6 @@ int	initial_checks(int argc, char **argv)
 		}
 	}
 	if (check_duplicates(argc, argv))
-	{
-		write(2, "Error\n", 6);
 		return (1);
-	}
 	return (0);
 }

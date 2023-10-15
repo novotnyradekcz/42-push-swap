@@ -4,7 +4,7 @@ BONUSNAME = checker
 
 SRCS = push_swap.c operations.c sorting.c moving.c calculations.c optimisation.c special_cases.c
 
-BONUSSRCS = checker.c
+BONUSSRCS = checker.c checking.c processing.c moves.c
 
 OBJS := ${SRCS:.c=.o}
 
@@ -22,7 +22,7 @@ $(NAME):	$(OBJS)
 $(OBJS):	$(SRCS)
 	cc -c $(FLAGS) $(SRCS)
 
-bonus):	$(BONUSOBJS)
+bonus:	$(BONUSOBJS)
 	cc $(FLAGS) -o $(BONUSNAME) $(BONUSOBJS)
 
 $(BONUSOBJS):	$(BONUSSRCS)
