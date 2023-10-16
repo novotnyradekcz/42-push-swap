@@ -6,13 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:57:26 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 20:59:08 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:42:31 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	special_cases(int **stacks, unsigned short *operations)
+void	special_cases(int **stacks, int *operations)
 {
 	if (stacks[0][0] == 1)
 		return ;
@@ -26,7 +26,7 @@ void	special_cases(int **stacks, unsigned short *operations)
 		five(stacks, operations);
 }
 
-void	move_rr(int **stacks, unsigned short *operations)
+void	move_rr(int **stacks, int *operations)
 {
 	int	i;
 	int	a;
@@ -51,7 +51,7 @@ void	move_rr(int **stacks, unsigned short *operations)
 	}
 }
 
-void	move_rrr(int **stacks, unsigned short *operations)
+void	move_rrr(int **stacks, int *operations)
 {
 	int	i;
 	int	a;
@@ -76,7 +76,7 @@ void	move_rrr(int **stacks, unsigned short *operations)
 	}
 }
 
-void	move_ra_rb(int **stacks, unsigned short *operations)
+void	move_ra_rb(int **stacks, int *operations)
 {
 	int	i;
 	int	a;

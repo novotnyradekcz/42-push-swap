@@ -6,13 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 21:11:42 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 17:11:14 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:42:31 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(int **stacks, int to_swap, unsigned short *operations)
+void	swap(int **stacks, int to_swap, int *operations)
 {
 	int	tmp;
 
@@ -37,7 +37,7 @@ void	swap(int **stacks, int to_swap, unsigned short *operations)
 	operations[0]++;
 }
 
-void	push_a(int **stacks, unsigned short *operations)
+void	push_a(int **stacks, int *operations)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ void	push_a(int **stacks, unsigned short *operations)
 	operations[0]++;
 }
 
-void	push_b(int **stacks, unsigned short *operations)
+void	push_b(int **stacks, int *operations)
 {
 	int	i;
 
@@ -71,7 +71,7 @@ void	push_b(int **stacks, unsigned short *operations)
 	operations[0]++;
 }
 
-void	rotate(int **stacks, int to_rotate, unsigned short *operations)
+void	rotate(int **stacks, int to_rotate, int *operations)
 {
 	int	i;
 	int	tmp;
@@ -99,7 +99,7 @@ void	rotate(int **stacks, int to_rotate, unsigned short *operations)
 	operations[0]++;
 }
 
-void	reverse_rotate(int **stacks, int to_rotate, unsigned short *operations)
+void	reverse_rotate(int **stacks, int to_rotate, int *operations)
 {
 	int	i;
 	int	tmp;

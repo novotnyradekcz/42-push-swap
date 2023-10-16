@@ -6,13 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/13 17:00:30 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:07:27 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_stacks(int **stacks, unsigned short *operations)
+void	sort_stacks(int **stacks, int *operations)
 {
 	int	i;
 	
@@ -33,15 +33,18 @@ void	sort_stacks(int **stacks, unsigned short *operations)
 
 void	process_stack(int argc, char **argv)
 {
-	int				**stacks;
-	unsigned short	*operations;
-	int				i;
+	int	**stacks;
+	int	*operations;
+	int	i;
 
 	i = -1;
 	stacks = (int **) malloc(5 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost, 3 - position of number in B that needs to be on top, 4 - operations (1: rr, 2: rrr, 4: ra, rrb, 8: rra, rb)
 	while (i++ < 4)
 		stacks[i] = (int *) malloc(argc * sizeof(int));
-	operations = (unsigned short *) malloc(65536 * sizeof(unsigned short));
+	if (argc < 33554432)
+		operations = (int *) malloc(64 * argc * sizeof(int));
+	else
+		operations = (int *) malloc(2147483647 * sizeof(int));
 	stacks[0][0] = argc - 1;
 	stacks[1][0] = 0;
 	operations[0] = 0;

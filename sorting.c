@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:13:41 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 20:56:29 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:42:31 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	assign_score(int **stacks, int position)
 	calculate_score(stacks, position - 1, i - 1);
 }
 
-void	do_sort(int **stacks, unsigned short *operations)
+void	do_sort(int **stacks, int *operations)
 {
 	int	i;
 
@@ -109,7 +109,7 @@ void	do_sort(int **stacks, unsigned short *operations)
 	}
 }
 
-void	start_sort(int **stacks, unsigned short *operations)
+void	start_sort(int **stacks, int *operations)
 {
 	int	i;
 
