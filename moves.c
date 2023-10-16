@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 08:33:23 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/15 09:04:41 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:54:39 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	push_a(int **stacks)
 {
 	int	i;
 
+	if (!stacks[1][0])
+		return ;
 	i = stacks[0][0] + 1;
 	while (i-- > 1)
 		stacks[0][i + 1] = stacks[0][i];
@@ -49,6 +51,8 @@ void	push_b(int **stacks)
 {
 	int	i;
 
+	if (!stacks[0][0])
+		return ;
 	i = stacks[1][0] + 1;
 	while (i-- > 1)
 		stacks[1][i + 1] = stacks[1][i];

@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:59:33 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/15 17:23:31 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:06:06 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	execute(int **stacks, char *instruction);
 void	free_all(int **stacks, char *instruction);
 
 int		process_input(int argc, char **argv);
+int		**allocate_stacks(int size);
 int		read_moves(int **stacks, char *instruction);
 int		append(char *s1, char s2);
 long	ft_atoi(const char *nptr);

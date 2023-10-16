@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:16:51 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/15 18:53:20 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:06:51 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,30 +91,45 @@ int	read_moves(int **stacks, char *instruction)
 	return (0);
 }	
 
+int	**allocate_stacks(int size)
+{
+	int	**stacks;
+
+	stacks = (int **) malloc(2 * sizeof(int *));	// 0 - stack A, 1 - stack B
+	if (!stacks)
+		return (0);
+	stacks[0] = (int *) malloc(size * sizeof(int));
+	stacks[1] = (int *) malloc(size * sizeof(int));
+	if (stacks[0] && stacks[1])
+	{
+		stacks[0][0] = size - 1;
+		stacks[1][0] = 0;
+	}
+	return(stacks);
+}
+
 int	process_input(int argc, char **argv)
 {
 	int		i;
 	int		**stacks;
 	char	*line;
 	
-	stacks = (int **) malloc(2 * sizeof(int *));	// 0 - stack A, 1 - stack B
-	if (!stacks)
-		return (1);
-	stacks[0] = (int *) malloc(argc * sizeof(int));
-	stacks[1] = (int *) malloc(argc * sizeof(int));
+	stacks = allocate_stacks(argc);
 	line = (char *)malloc(4 * sizeof(char));
 	if (!stacks[0] || !stacks[1] || !line)
 	{
 		free_all(stacks, line);
 		return (1);
 	}
-	stacks[0][0] = argc - 1;
 	i = 0;
 	while (++i < argc)
 		stacks[0][i] = ft_atoi(argv[i]);
 	line[0] = '\0';
 	if (read_moves(stacks, line))
+	{
+		free_all(stacks, line);
 		return (1);
+	}
 	check_result(stacks);
 	free_all(stacks, line);
 	return (0);
