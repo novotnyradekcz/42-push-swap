@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 23:04:34 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:46:40 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,131 +14,87 @@
 
 #include <stdio.h>
 
-void	special_cases(int *stack_a, int *stack_b, short *operations)
-{
-	if (stack_a[0] == 1)
-		return ;
-	if (stack_a[0] == 2)
-		two(stack_a, stack_b, operations);
-	else if (stack_a[0] == 3)
-		three(stack_a, stack_b, operations);
-	else if (stack_a[0] == 4)
-		four(stack_a, stack_b, operations);
-	else
-		five(stack_a, stack_b, operations);
-	return ;
-}
-
-int	calculations(int *stack_a, int *stack_b, int number)
+int	find_min_index(int **stacks)
 {
 	int	i;
-	int	front;
-	int	back;
+	int	min;
+	int	index;
+
+	i = 0;
+	min = stacks[2][1];
+	index = 1;
+	while (i++ < stacks[0][0])
+	{
+		if (stacks[2][i] < min)
+		{
+			min = stacks[2][i];
+			index = i;
+		}
+	}
+	return (index);
+}
+
+int	find_min_max(int *stack, int min_or_max)
+{
+	int	i;
+	int extremum;
+
+	i = 0;
+	extremum = stack[1];
+	if (min_or_max < 0)
+	{
+		while (i++ < stack[0])
+		{
+			if (stack[i] < extremum)
+				extremum = stack[i];
+		}
+	}
+	else
+	{
+		while (i++ < stack[0])
+		{
+			if (stack[i] > extremum)
+				extremum = stack[i];
+		}
+	}
+	return (extremum);
+}
+
+int	find_offset(int **stacks)
+{
+	int	i;
+	int	max;
 
 	i = 1;
-	while (i <= stack_b[0] && stack_b[i] > stack_a[number])
+	max = find_min_max(stacks[1], 1);
+	while (i < stacks[1][0] && stacks[1][i] != max)
 		i++;
-	front = i - 1;
-	back = stack_b[0] - front;
-	back++;
-	back--;
-	// if (front < back)
-	// 	return (front);
-	// else
-	// 	return ((-1) * back);
-	return (front);
+	return (i);
 }
 
-int	find_max(int *stack)
+long	ft_atoi(const char *nptr)
 {
-	int	i;
-	int maximum;
+	int		i;
+	int		neg;
+	long	res;
 
+	neg = 1;
+	res = 0;
 	i = 0;
-	maximum = stack[1];
-	while (i++ < stack[0])
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		if (stack[i] > maximum)
-			maximum = stack[i];
+		if (nptr[i] == '-')
+			neg = -neg;
+		i++;
 	}
-	return (maximum);
-}
-
-void	print_stack(int *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i++ < stack[0])
-		printf("%d ", stack[i]);
-	printf("\n");
-}
-
-void	sorting(int *stack_a, int *stack_b, int *moves, short *operations)
-{
-	int i;
-	
-	if (moves[1] >= 0)
+	while (nptr[i] >= 48 && nptr[i] <= 57)
 	{
-		i = 0;
-		while (i++ < moves[0])
-			rotate(stack_a, stack_b, 0, operations);
-		i = 0;
-		while (i++ < moves[1])
-			rotate(stack_a, stack_b, 1, operations);
-		push_b(stack_a, stack_b, operations);
-		i = find_max(stack_b);
-		while (stack_b[1] != i)
-			reverse_rotate(stack_a, stack_b, 1, operations);
+		res = res * 10 + (nptr[i] - 48);
+		i++;
 	}
-	if (moves[1] < 0)
-	{
-		i = 0;
-		while (i++ < (stack_a[0] - moves[0] - 1))
-			reverse_rotate(stack_a, stack_b, 0, operations);
-		i = 0;
-		while (i++ < (stack_b[0] + moves[1] - 1))
-			reverse_rotate(stack_a, stack_b, 1, operations);
-		push_b(stack_a, stack_b, operations);
-		i = find_max(stack_b);
-		while (stack_b[1] != i)
-			rotate(stack_a, stack_b, 1, operations);
-	}
-}
-
-void	turk_sort(int *stack_a, int *stack_b, short *operations)
-{
-	int	i;
-	int candidate;
-	int *moves;
-
-	moves = (int *) malloc(2 * sizeof(int));
-	push_b(stack_a, stack_b, operations);
-	push_b(stack_a, stack_b, operations);
-	if (stack_b[1] < stack_b[2])
-		swap(stack_a, stack_b, 1, operations);
-	while (stack_a[0])
-	{
-		i = 0;
-		moves[0] = stack_a[0];
-		moves[1] = stack_b[0];
-		candidate = 0;
-		while (i++ < stack_a[0])
-		{
-			candidate = calculations(stack_a, stack_b, i);
-			if ((candidate >= 0 && candidate < moves[1])
-				|| (candidate < 0 && ((-1) * candidate) < moves[1]))
-			{
-				moves[0] = i - 1;
-				moves[1] = candidate;
-			}
-		}
-		sorting(stack_a, stack_b, moves, operations);
-	}
-	while (stack_b[0])
-		push_a(stack_a, stack_b, operations);
-	print_stack(stack_a);
-	free(moves);
+	return (neg * res);
 }
 
 // new approach:

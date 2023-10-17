@@ -6,80 +6,78 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/10 09:41:07 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:07:27 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atoi(const char *nptr)
-{
-	int		i;
-	int		neg;
-	long	res;
-
-	neg = 1;
-	res = 0;
-	i = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			neg = -neg;
-		i++;
-	}
-	while (nptr[i] >= 48 && nptr[i] <= 57)
-	{
-		res = res * 10 + (nptr[i] - 48);
-		i++;
-	}
-	return (neg * res);
-}
-
-void	sort_stacks(int *stack_a, int *stack_b, short *operations)
+void	sort_stacks(int **stacks, int *operations)
 {
 	int	i;
 	
 	i = 1;
-	while (i < stack_a[0])
+	while (i < stacks[0][0])
 	{
-		if (stack_a[i] > stack_a[i + 1])
+		if (stacks[0][i] > stacks[0][i + 1])
 			break ;
 		i++;
 	}
-	if (i == stack_a[0])
+	if (i == stacks[0][0])
 		return ;
-	if (stack_a[0] < 6)
-	{
-		special_cases(stack_a, stack_b, operations);
-		return ;
-	}
-	while(stack_a[0] > 0)
-	{
-		turk_sort(stack_a, stack_b, operations);
-		return ;
-	}
+	if (stacks[0][0] < 6)
+		special_cases(stacks, operations);
+	else
+		start_sort(stacks, operations);
 }
 
 void	process_stack(int argc, char **argv)
 {
-	int	*stack_a;
-	int	*stack_b;
-	short	*operations;
+	int	**stacks;
+	int	*operations;
 	int	i;
-	// TODO: idea - merge stack_a and b into one array of arrays stack[][]
-	stack_a = (int *) malloc(argc * sizeof(int));	// leave one extra sport for size
-	stack_b = (int *) malloc(argc * sizeof(int));	// stack_a[0] and stack_b[0] is current size of stack 
-	operations = (short *) malloc(100000 * sizeof(short));
-	i = 0;
-	stack_a[0] = argc - 1;
-	stack_b[0] = 0;
+
+	i = -1;
+	stacks = (int **) malloc(5 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost, 3 - position of number in B that needs to be on top, 4 - operations (1: rr, 2: rrr, 4: ra, rrb, 8: rra, rb)
+	while (i++ < 4)
+		stacks[i] = (int *) malloc(argc * sizeof(int));
+	if (argc < 33554432)
+		operations = (int *) malloc(64 * argc * sizeof(int));
+	else
+		operations = (int *) malloc(2147483647 * sizeof(int));
+	stacks[0][0] = argc - 1;
+	stacks[1][0] = 0;
 	operations[0] = 0;
+	i = 0;
 	while (i++ < argc - 1)
-		stack_a[i] = ft_atoi(argv[i]);
-	sort_stacks(stack_a, stack_b, operations);
-	read_operations(operations);
+		stacks[0][i] = ft_atoi(argv[i]);
+	sort_stacks(stacks, operations);
+	read_operations(operations);	// post-optimisation
+	i = -1;
+	while (i++ < 4)
+		free(stacks[i]);
+	free(stacks);
+	free(operations);
+}
+
+int	check_duplicates(int length, char **input)
+{
+	int	i;
+	int	j;
+	int	number;
+
+	i = 0;
+	while (++i < length)
+	{
+		number = ft_atoi(input[i]);
+		j = i;
+		while (++j < length)
+		{
+			if (number == ft_atoi(input[j]))
+				return (1);
+		}
+	}
+	return (0);
 }
 
 int	check_input(int length, char **input)
@@ -118,7 +116,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (check_input(argc, argv))
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (1);
 	}
 	i = 0;
@@ -126,10 +124,20 @@ int	main(int argc, char **argv)
 	{
 		if (ft_atoi(argv[i]) < -2147483648 || ft_atoi(argv[i]) > 2147483647)
 		{
-			write(1, "Error\n", 6);
+			write(2, "Error\n", 6);
 			return (1);
 		}
+	}
+	if (check_duplicates(argc, argv))
+	{
+		write(2, "Error\n", 6);
+		return (1);
 	}
 	process_stack(argc, argv);
 	return (0);
 }
+
+// stacks[0][0] and stacks[1][0] is current size of stack 
+// stacks[2][0] is the position of the largest number
+// stacks[3][0] is position of the minimum of stacks[2]
+// stacks[4][0] has the value from stacks[3] corresponding to stacks[3][0] (=stacks[3][stacks[3][0]])
