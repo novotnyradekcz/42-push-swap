@@ -22,7 +22,9 @@ $(NAME):	$(OBJS)
 $(OBJS):	$(SRCS)
 	cc -c $(FLAGS) $(SRCS)
 
-bonus:	$(BONUSOBJS)
+bonus: $(BONUSNAME)
+
+$(BONUSNAME):	$(BONUSOBJS)
 	cc $(FLAGS) -o $(BONUSNAME) $(BONUSOBJS)
 
 $(BONUSOBJS):	$(BONUSSRCS)
