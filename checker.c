@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:11 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/15 17:25:47 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:16:24 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	execute(int **stacks, char *instruction)
 }
 
 int	main(int argc, char **argv)
-{	
+{
 	if (argc < 2)
 		return (0);
 	if (initial_checks(argc, argv))

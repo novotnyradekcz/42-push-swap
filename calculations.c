@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:15:17 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/12 21:46:40 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:16:04 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	find_min_index(int **stacks)
 int	find_min_max(int *stack, int min_or_max)
 {
 	int	i;
-	int extremum;
+	int	extremum;
 
 	i = 0;
 	extremum = stack[1];
@@ -96,15 +96,3 @@ long	ft_atoi(const char *nptr)
 	}
 	return (neg * res);
 }
-
-// new approach:
-// stick to moving all numbers from A to B in reverse order and then simply moving them back
-// but
-// before pushing each number, calculate the number of operations it would take
-// simply as how close is this number to the edge of the stack
-// and how much the other stack would need to be shifted
-// if rotating is in the same direction
-// take into account combining ra + rb into rr or rra + rrb into rrr
-// save this score for each number on A
-// then select the one with lowest score and execute operations to move it
-// repeat

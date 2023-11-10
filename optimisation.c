@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 11:43:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/16 15:42:31 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:17:27 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	operation_sums(int *operations, int i, int sum)
 	return (i);
 }
 
-
 void	optimise_operations(int *operations)
 {
 	int	i;
@@ -42,8 +41,8 @@ void	optimise_operations(int *operations)
 	while (i < operations[0])
 	{
 		sum = operations[i] + operations[i + 1];
-		if (sum == 2 || sum == 4 || sum == 8 ||
-			sum == 24 || sum == 288 || sum == 576)
+		if (sum == 2 || sum == 4 || sum == 8
+			|| sum == 24 || sum == 288 || sum == 576)
 		{
 			j = i;
 			while (++j < operations[0])

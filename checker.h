@@ -6,12 +6,12 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:59:33 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/16 15:06:06 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:37:53 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <stdlib.h>
 # include <unistd.h>

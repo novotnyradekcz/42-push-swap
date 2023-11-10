@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:39:52 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/16 16:07:27 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:21:25 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sort_stacks(int **stacks, int *operations)
 {
 	int	i;
-	
+
 	i = 1;
 	while (i < stacks[0][0])
 	{
@@ -38,7 +38,7 @@ void	process_stack(int argc, char **argv)
 	int	i;
 
 	i = -1;
-	stacks = (int **) malloc(5 * sizeof(int *));	// 0 - stack A, 1 - stack B, 2 - operation cost, 3 - position of number in B that needs to be on top, 4 - operations (1: rr, 2: rrr, 4: ra, rrb, 8: rra, rb)
+	stacks = (int **) malloc(5 * sizeof(int *));
 	while (i++ < 4)
 		stacks[i] = (int *) malloc(argc * sizeof(int));
 	if (argc < 33554432)
@@ -52,7 +52,7 @@ void	process_stack(int argc, char **argv)
 	while (i++ < argc - 1)
 		stacks[0][i] = ft_atoi(argv[i]);
 	sort_stacks(stacks, operations);
-	read_operations(operations);	// post-optimisation
+	read_operations(operations);
 	i = -1;
 	while (i++ < 4)
 		free(stacks[i]);
@@ -140,4 +140,5 @@ int	main(int argc, char **argv)
 // stacks[0][0] and stacks[1][0] is current size of stack 
 // stacks[2][0] is the position of the largest number
 // stacks[3][0] is position of the minimum of stacks[2]
-// stacks[4][0] has the value from stacks[3] corresponding to stacks[3][0] (=stacks[3][stacks[3][0]])
+// stacks[4][0] has the value from stacks[3] corresponding to stacks[3][0]
+// (=stacks[3][stacks[3][0]])

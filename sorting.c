@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:13:41 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/16 15:42:31 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:32:04 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 void	calculate_score_rrr(int **stacks, int a, int b)
 {
-	int min[2];
-	
+	int	min[2];
+
 	min[0] = stacks[0][0] + stacks[1][0];
 	if (a >= b && a + 1 < min[0])
 	{
 		min[0] = a + 1;
-		min[1] = 1;	// rr
+		min[1] = 1;
 	}
 	if (stacks[1][0] - b >= stacks[0][0] - a && stacks[1][0] - b + 1 < min[0])
 	{
 		min[0] = stacks[1][0] - b + 1;
-		min[1] = 2;	// rrr
+		min[1] = 2;
 	}
 	if (a <= b && b + 1 < min[0])
 	{
 		min[0] = b + 1;
-		min[1] = 1;	// rr
+		min[1] = 1;
 	}
 	if (stacks[1][0] - b <= stacks[0][0] - a && stacks[0][0] - a + 1 < min[0])
 	{
 		min[0] = stacks[0][0] - a + 1;
-		min[1] = 2;	// rrr
+		min[1] = 2;
 	}
 	stacks[2][a + 1] = min[0];
 	stacks[4][a + 1] = min[1];
@@ -50,22 +50,18 @@ void	calculate_score(int **stacks, int a, int b)
 	if (a + stacks[1][0] - b + 1 < min)
 	{
 		min = a + stacks[1][0] - b + 1;
-		moves = 4;	// ra, rrb
+		moves = 4;
 	}
 	if (b + stacks[0][0] - a + 1 < min)
 	{
 		min = b + stacks[0][0] - a + 1;
-		moves = 8;	// rra, rb
+		moves = 8;
 	}
 	calculate_score_rrr(stacks, a, b);
 	if (min < stacks[2][a + 1])
 	{
 		stacks[2][a + 1] = min;
-		stacks[2][a + 1] = min;
-		stacks[3][a + 1] = b + 1;
-			stacks[2][a + 1] = min;
-		stacks[3][a + 1] = b + 1;
-			stacks[4][a + 1] = moves;
+		stacks[4][a + 1] = moves;
 	}
 	stacks[3][a + 1] = b + 1;
 }

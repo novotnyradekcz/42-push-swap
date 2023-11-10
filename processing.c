@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:16:51 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/10/16 15:06:51 by rnovotny         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:34:57 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ int	append(char *s1, char s2)
 	while (s1[i] != '\0')
 		i++;
 	if ((i == 0 && s2 != 'p' && s2 != 'r' && s2 != 's')
-	|| (i == 1 && s1[0] == 'p' && s2 != 'a' && s2 != 'b')
-	|| (i == 1 && s1[0] == 'r' && s2 != 'a' && s2 != 'b' && s2 != 'r')
-	|| (i == 1 && s1[0] == 's' && s2 != 'a' && s2 != 'b' && s2 != 's')
-	|| (i == 2 && s1[0] == 'p')
-	|| (i == 2 && s1[0] == 'r' && (s1[1] == 'a' || s1[1] == 'b'))
-	|| (i == 2 && s1[0] == 'r' && s1[1] == 'r'
-	&& s2 != 'a' && s2 != 'b' && s2 != 'r')
-	|| (i == 2 && s1[0] == 's')
-	|| (i == 3))
+		|| (i == 1 && s1[0] == 'p' && s2 != 'a' && s2 != 'b')
+		|| (i == 1 && s1[0] == 'r' && s2 != 'a' && s2 != 'b' && s2 != 'r')
+		|| (i == 1 && s1[0] == 's' && s2 != 'a' && s2 != 'b' && s2 != 's')
+		|| (i == 2 && s1[0] == 'p')
+		|| (i == 2 && s1[0] == 'r' && (s1[1] == 'a' || s1[1] == 'b'))
+		|| (i == 2 && s1[0] == 'r' && s1[1] == 'r'
+			&& s2 != 'a' && s2 != 'b' && s2 != 'r')
+		|| (i == 2 && s1[0] == 's')
+		|| (i == 3))
 		return (1);
 	while (s1[i] != '\0')
 		i++;
@@ -86,16 +86,16 @@ int	read_moves(int **stacks, char *instruction)
 			while (check == 1)
 				check = read(0, &buffer, 1);
 			return (1);
-		}		
+		}
 	}
 	return (0);
-}	
+}
 
 int	**allocate_stacks(int size)
 {
 	int	**stacks;
 
-	stacks = (int **) malloc(2 * sizeof(int *));	// 0 - stack A, 1 - stack B
+	stacks = (int **) malloc(2 * sizeof(int *));
 	if (!stacks)
 		return (0);
 	stacks[0] = (int *) malloc(size * sizeof(int));
@@ -105,7 +105,7 @@ int	**allocate_stacks(int size)
 		stacks[0][0] = size - 1;
 		stacks[1][0] = 0;
 	}
-	return(stacks);
+	return (stacks);
 }
 
 int	process_input(int argc, char **argv)
@@ -113,7 +113,7 @@ int	process_input(int argc, char **argv)
 	int		i;
 	int		**stacks;
 	char	*line;
-	
+
 	stacks = allocate_stacks(argc);
 	line = (char *)malloc(4 * sizeof(char));
 	if (!stacks[0] || !stacks[1] || !line)
