@@ -33,14 +33,25 @@ Pass a list of 32-bit integers to the `push_swap` program as arguments, which re
 Example:
 ```
 $>./push_swap 8 -1 6 3 20
+pb
+pb
+pb
+rb
+pb
+rb
+rb
+pa
+pa
+pa
+pa
 ```
 
 ### Bonus part
 
-If you feed the output of the `push_swap` to the `checker` (using the pipe `|` operator, or simply typing the intructions into the standard input, one on each line, ending with **Ctrl + D**) program while passing the same list of numbers as arguments, the program will print `OK`, if the instructions do indeed order the stack correctly or `KO`, if they don't. In case of incorrectly formatted input, it will simply print `Error`.
+If you feed the output of the `push_swap` to the `checker` (using the pipe `|` operator, or simply typing the intructions into the standard input, one on each line, ending with **Ctrl + D**) program while passing the same list of numbers as arguments, the program will print `OK`, if the instructions do indeed order the stack correctly, or `KO`, if they don't. In case of incorrectly formatted input, it will simply print `Error`.
+
 Example:
 ```
 $>./push_swap 8 -1 6 3 20 | ./checker 8 -1 6 3 20
 OK
 ```
-...README still in progress...
