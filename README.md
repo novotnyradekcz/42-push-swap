@@ -44,6 +44,8 @@ pa
 pa
 pa
 pa
+$>./push_swap 8 -1 6 3 twenty
+Error
 ```
 
 ### Bonus part
@@ -54,4 +56,10 @@ Example:
 ```
 $>./push_swap 8 -1 6 3 20 | ./checker 8 -1 6 3 20
 OK
+$>./push_swap 8 -1 6 3 20 | ./checker 8 -1 6
+KO
+$>./push_swap 8 -1 6 3 20 | ./checker 8 -1 6 3 twenty
+Error
+$>./push_swap 8 -1 6 3 twenty | ./checker 8 -1 6 3 20
+Error
 ```
